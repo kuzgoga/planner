@@ -1,17 +1,51 @@
-// https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
-  compatibilityDate: "2024-11-01",
-  devtools: { enabled: true },
-  modules: ["@scalar/nuxt"],
+  modules: ["@scalar/nuxt", "nuxt-jwt-auth", "nuxt-typeorm"],
+
   nitro: {
     experimental: {
       openAPI: true,
     },
-  },
-  scalar: {
-    pathRouting: {
-      basePath: "/scalar",
+    esbuild: {
+      options: {
+        tsconfigRaw: {
+          compilerOptions: {
+            experimentalDecorators: true,
+          },
+        },
+      },
+    },
+    typescript: {
+      tsConfig: {
+        compilerOptions: {
+          emitDecoratorMetadata: true,
+          experimentalDecorators: true,
+          strictPropertyInitialization: false,
+        },
+      },
     },
   },
-  pages: false,
+
+  typeorm: {
+    type: "sqlite",
+    database: "db.sqlite",
+    synchronize: true,
+    logging: true,
+  },
+
+  nuxtJwtAuth: {
+    baseUrl: "http://localhost:3001/api", // URL of your backend
+    endpoints: {
+      login: "/login", // Where to request login (POST)
+      logout: "/logout", // Where to request logout (POST)
+      user: "/user", // Where to request user data (GET)
+      signup: "/signup", // Where to request signup (POST)
+    },
+    redirects: {
+      home: "/", // Where to redirect after successfull login and logout
+      login: "/login", // Where to redirect if user is not logged in and accesses a logged-only route
+      logout: "/logout", // Where to redirect if user is logged in and accesses a guest-only route
+    },
+  },
+
+  compatibilityDate: "2025-02-27",
 });

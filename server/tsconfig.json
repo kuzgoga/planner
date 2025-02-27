@@ -1,7 +1,10 @@
 {
   "extends": "../.nuxt/tsconfig.server.json",
   "compilerOptions": {
-    "target": "ES2022",
-    "module": "ESNext"
+    "target": "ESNext",
+    "module": "ESNext",
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "strictPropertyInitialization": false
   }
 }
