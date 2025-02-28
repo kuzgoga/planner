@@ -3,8 +3,8 @@ import type { LoginResponse } from "~/server/models/login";
 import type { ResponseError } from "~/server/models/error";
 
 definePageMeta({
-  layout: 'auth'
-})
+  layout: "auth",
+});
 
 const email = defineModel<string>("email");
 const password = defineModel<string>("password");
@@ -67,7 +67,8 @@ const handleLogin = async () => {
       <template #description>Доступно только для отличников</template>
     </PrimaryButton>
     <span class="text-center text-sm font-bold mt-1">
-      Нет аккаунта? <a href="/auth/register">Зарегистрироваться</a>
+      Нет аккаунта?
+      <NuxtLink to="/auth/register">Зарегистрироваться</NuxtLink>
     </span>
     <span class="text-center text-sm font-bold text-red-500">
       &nbsp;{{ errorText }}&nbsp;

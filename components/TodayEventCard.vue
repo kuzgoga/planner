@@ -1,5 +1,6 @@
 <script setup lang="ts">
 defineProps<{
+  id: number;
   title: string;
   description: string;
   startDate: Date;
@@ -30,9 +31,10 @@ const formatDuration = (start: Date, end: Date) => {
 </script>
 
 <template>
-  <div
-    class="w-full h-[172px] flex flex-col items-center px-4 py-2 rounded-[25px]"
+  <NuxtLink
+    class="w-full h-[172px] flex flex-col items-center px-4 py-2 rounded-[25px] cursor-pointer no-underline"
     :style="{ backgroundColor: color }"
+    :to="`/events/${id}`"
   >
     <div class="w-full flex flex-row justify-between items-center">
       <span class="text-2xl font-bold text-text-gray/65">{{ title }}</span>
@@ -73,5 +75,5 @@ const formatDuration = (start: Date, end: Date) => {
         <span class="text-xs font-semibold text-text-gray/65">Кончало</span>
       </div>
     </div>
-  </div>
+  </NuxtLink>
 </template>
