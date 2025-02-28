@@ -30,6 +30,9 @@ export class User extends BaseEntity {
   @Column({ type: "varchar" })
   lastName: string;
 
+  @Column({ type: "varchar", default: "" })
+  avatar: string;
+
   @Column({ type: "varchar" })
   password_hash: string;
 
