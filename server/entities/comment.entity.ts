@@ -14,6 +14,6 @@ export class Comment extends BaseEntity {
   @Column({ type: "text" })
   content: string;
 
-  @Column({ type: "timestamptz", default: "now()" })
+  @Column({ type: "timestamp", default: "now()" })
   created_at: Date;
 }

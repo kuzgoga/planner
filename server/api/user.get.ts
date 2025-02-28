@@ -2,6 +2,7 @@ import { User } from "../entities/user.entity";
 import { GetAllUsersResponse } from "../models/get_all_users";
 
 export default defineEventHandler(async (event) => {
+  const _ = await requireUserSession(event);
   const users = await User.find();
   const response: GetAllUsersResponse = {
     users: users.map((user) => ({
