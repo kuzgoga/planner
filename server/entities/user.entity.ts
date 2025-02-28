@@ -10,6 +10,12 @@ import { BaseEntity } from "typeorm";
 import { Event } from "./event.entity";
 import { Comment } from "./comment.entity";
 
+export enum Role {
+  PARTICIPANT = "PARTICIPANT",
+  ORGANIZER = "ORGANIZER",
+  ADMIN = "ADMIN",
+}
+
 @Entity()
 export class User extends BaseEntity {
   @PrimaryGeneratedColumn()
@@ -27,8 +33,8 @@ export class User extends BaseEntity {
   @Column({ type: "varchar" })
   password_hash: string;
 
-  @Column({ type: "varchar" })
-  role: string;
+  @Column({ type: "enum", enum: Role })
+  role: Role;
 
   @ManyToMany(() => Event, (event) => event.participants)
   events: Event[];

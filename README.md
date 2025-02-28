@@ -1,9 +1,5 @@
 # Minimal Starter
 
-TODO: Implement user authentication and authorization.
-
-TODO: Migrate from Sqlite to PostgreSQL.
-
 Look at the [Nuxt documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
 
 ## Setup
@@ -20,6 +16,34 @@ Start the development server on `http://localhost:3000`:
 
 ```bash
 bun run dev
+```
+
+Docker Compose file for development:
+
+```yaml
+services:
+  database:
+    image: postgres
+    restart: always
+    shm_size: 128mb
+    volumes:
+      - ./postgres:/data/postgres
+    environment:
+      POSTGRES_USER: planner
+      POSTGRES_PASSWORD: superpass
+      POSTGRES_DB: planner
+    network_mode: host
+```
+
+Dotenv file for development:
+
+```bash
+NUXT_SESSION_PASSWORD=0a021f1a745ff66a040e7321f6aff9992a3d95b516f59bdab7b887cc6b2b925b
+SALT_ROUNDS=10
+DB_HOST="127.0.0.1"
+DB_PORT="5432"
+DB_USER="planner"
+DB_PASSWORD="superpass"
 ```
 
 **Scalar** is located at [http://localhost:3000/docs](http://localhost:3000/docs)
