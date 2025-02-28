@@ -31,7 +31,12 @@ const handleLogin = async () => {
     body: { email: email.value, password: password.value },
   });
 
-  console.log(response);
+  if (response.error.value) {
+    showError(response.error.value.statusMessage || "Неизвестная ошибка");
+    return;
+  } else {
+    await navigateTo("/");
+  }
 };
 </script>
 
