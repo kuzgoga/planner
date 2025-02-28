@@ -39,9 +39,13 @@ export class User extends BaseEntity {
   @Column({ type: "enum", enum: Role })
   role: Role;
 
-  @ManyToMany(() => Event, (event) => event.participants)
+  @ManyToMany(() => Event, (event) => event.participants, {
+    onDelete: "CASCADE",
+  })
   events: Event[];
 
-  @OneToMany(() => Comment, (comment) => comment.author)
+  @OneToMany(() => Comment, (comment) => comment.author, {
+    onDelete: "CASCADE",
+  })
   comments: Comment[];
 }

@@ -34,7 +34,7 @@ export class Event extends BaseEntity {
   @Column("int", { array: true, default: [] })
   likes: number[];
 
-  @ManyToMany(() => User, (user) => user.events)
+  @ManyToMany(() => User, (user) => user.events, { onDelete: "CASCADE" })
   @JoinTable()
   participants: User[];
 }
