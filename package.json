@@ -11,9 +11,8 @@
   },
   "dependencies": {
     "@scalar/nuxt": "0.2.200",
-    "bcrypt-ts": "^6.0.0",
-    "class-validator": "^0.14.1",
     "@tailwindcss/vite": "^4.0.9",
+    "bcrypt-ts": "^6.0.0",
     "nuxt": "^3.15.4",
     "nuxt-auth-utils": "^0.5.16",
     "nuxt-typeorm": "^0.0.8",
@@ -31,7 +30,6 @@
     "@nuxt/icon": "^1.10.3",
     "@nuxt/image": "^1.9.0",
     "@pinia/nuxt": "^0.10.1",
-    "nuxt-jwt-auth": "^1.0.0",
     "typescript": "^5.7.3",
     "vue-tsc": "^2.2.4"
   },
