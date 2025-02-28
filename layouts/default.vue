@@ -4,9 +4,10 @@
       '-top-full': !show,
       'top-0': show,
     }" v-model="show"></Menu>
-    <button @click="show = true">show</button>
-    <header></header>
-    <slot />
+    <div class="pt-5 p-6">
+      <VHeader v-model="show"/>
+      <slot></slot>
+    </div>
   </div>
 </template>
 
