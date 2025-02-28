@@ -1,10 +1,17 @@
 <script setup lang="ts">
-const { data, error } = await useFetch("/api/ping");
+const sex = defineModel<string>("sex", { required: true, default: "Не дали" });
+
+watch(sex, (newValue) => {
+  console.log(newValue);
+});
 </script>
 
 <template>
-  <h2 class="font-bold text-gray">Wellcum to the Boilerplate</h2>
-  <Icon name="material-symbols:chevron-left-rounded" />
+  <TextInput v-model="sex" placeholder="Введите секс" />
+  <PrimaryButton>
+    <template v-slot:title>Войти на платформу</template>
+    <template v-slot:description>Доступно только для отличников</template>
+  </PrimaryButton>
 </template>
 
 <style scoped></style>
