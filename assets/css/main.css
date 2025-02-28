@@ -9,6 +9,9 @@
   --color-text-gray: #111111;
   --color-text-brown: #8c2f1b;
   --color-border-gray: #898989;
+  --color-accent-green: #bbe19e;
+  --color-accent-pink: #f4b0c0;
+  --color-accent-dark-pink: #315218
 }
 
 @layer components {
