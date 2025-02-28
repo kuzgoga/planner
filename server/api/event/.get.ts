@@ -3,8 +3,12 @@ import { Event } from "../../entities/event.entity";
 import { Equal } from "typeorm";
 import { GetEventByIdResponse } from "~/server/models/events_routes";
 import { requireOrganizerRole } from "../../utils/require_organizer_role";
+import { H3Event, EventHandlerRequest } from "h3";
+import { createTypedRoute } from "../../utils/typed_route";
 
-export default defineEventHandler(async (event) => {
+async function defineEventHandler(
+  event: H3Event,
+): Promise<GetEventByIdResponse> {
   requireOrganizerRole(event);
   const eventId = getIdFromEvent(event);
 
@@ -18,6 +22,7 @@ export default defineEventHandler(async (event) => {
       statusMessage: "Событие не найдено",
     });
   }
-  const res: GetEventByIdResponse = requestedEvent;
-  return res;
-});
+  return requestedEvent;
+}
+
+export default createTypedRoute(defineEventHandler);

@@ -2,8 +2,10 @@ import { SignUpRequestSchema, SignUpResponse } from "../../models/signup";
 import { User } from "../../entities/user.entity";
 import "dotenv/config";
 import { genSaltSync, hashSync } from "bcrypt-ts";
+import { createTypedRoute } from "../../utils/typed_route";
+import { H3Event, EventHandlerRequest } from "h3";
 
-export default defineEventHandler(async (event) => {
+async function signup_handler(event: H3Event): Promise<SignUpResponse> {
   const signupAttempt = await validateRequest(event, SignUpRequestSchema);
 
   const salt = genSaltSync(Number(process.env.SALT_ROUNDS));
@@ -27,6 +29,7 @@ export default defineEventHandler(async (event) => {
     },
   });
 
-  const response: SignUpResponse = { id: newUser.id };
-  return response;
-});
+  return { id: newUser.id };
+}
+
+export default createTypedRoute(signup_handler);

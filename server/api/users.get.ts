@@ -1,8 +1,12 @@
 import { ILike } from "typeorm";
 import { User } from "../entities/user.entity";
-import { GetAllUsersResponse } from "../models/get_all_users";
+import { GetAllUsersResponse } from "../models/user_routes";
+import { H3Event, EventHandlerRequest } from "h3";
+import { createTypedRoute } from "../utils/typed_route";
 
-export default defineEventHandler(async (event) => {
+async function getAllUsersHandler(
+  event: H3Event,
+): Promise<GetAllUsersResponse> {
   /* Get all users with search by email and name */
   /* Use query parameter `keyphrase` to search by email, first name, and last name */
   const _ = await requireUserSession(event);
@@ -22,7 +26,7 @@ export default defineEventHandler(async (event) => {
     users = await User.find();
   }
 
-  const response: GetAllUsersResponse = {
+  return {
     users: users.map((user) => ({
       id: user.id,
       firstName: user.firstName,
@@ -31,5 +35,6 @@ export default defineEventHandler(async (event) => {
       role: user.role,
     })),
   };
-  return response;
-});
+}
+
+export default createTypedRoute(getAllUsersHandler);

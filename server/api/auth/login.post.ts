@@ -3,8 +3,9 @@ import { ZodObject, ZodString, ZodTypeAny } from "zod";
 import { LoginRequestSchema, LoginResponse } from "../../models/login";
 import { compareSync } from "bcrypt-ts";
 import { validateRequest } from "../../utils/validate_request";
+import { createTypedRoute } from "../../utils/typed_route";
 
-export default defineEventHandler(async (event) => {
+async function loginHandler(event: H3Event): Promise<LoginResponse> {
   const loginAttempt = await validateRequest(event, LoginRequestSchema);
   const user = await User.findOneBy({ email: loginAttempt.email });
 
@@ -32,6 +33,7 @@ export default defineEventHandler(async (event) => {
     },
   });
 
-  const response: LoginResponse = {};
-  return response;
-});
+  return {};
+}
+
+export default createTypedRoute(loginHandler);

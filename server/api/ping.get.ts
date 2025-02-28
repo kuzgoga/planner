@@ -1,6 +1,8 @@
 import { PingResponse } from "../models/ping";
+import { createTypedRoute } from "../utils/typed_route";
 
-export default defineEventHandler(async (event) => {
-  const response: PingResponse = { message: "pong" };
-  return response;
-});
+async function PingHandler(): Promise<PingResponse> {
+  return { message: "pong" };
+}
+
+export default createTypedRoute(PingHandler);

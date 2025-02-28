@@ -1,8 +1,12 @@
 import { Equal } from "typeorm";
 import { User } from "../entities/user.entity";
-import { GetUserByIdResponse } from "../models/get_user_by_id";
+import { GetUserByIdResponse } from "../models/user_routes";
+import { createTypedRoute } from "../utils/typed_route";
+import { H3Event, EventHandlerRequest } from "h3";
 
-export default defineEventHandler(async (event) => {
+async function getUserByIdHandler(
+  event: H3Event,
+): Promise<GetUserByIdResponse> {
   /* Get user by id */
   const _ = await requireUserSession(event);
 
@@ -34,13 +38,13 @@ export default defineEventHandler(async (event) => {
     });
   }
 
-  const response: GetUserByIdResponse = {
+  return {
     id: user.id,
     firstName: user.firstName,
     lastName: user.lastName,
     email: user.email,
     role: user.role,
   };
+}
 
-  return response;
-});
+export default createTypedRoute(getUserByIdHandler);

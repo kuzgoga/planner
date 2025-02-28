@@ -4,8 +4,12 @@ import { EventCreateResponse } from "../../models/events_routes";
 import { requireOrganizerRole } from "../../utils/require_organizer_role";
 import { In } from "typeorm";
 import { validateRequest } from "../../utils/validate_request";
+import { H3Event, EventHandlerRequest } from "h3";
+import { createTypedRoute } from "../../utils/typed_route";
 
-export default defineEventHandler(async (serverEvent) => {
+async function defineEventHandler(
+  serverEvent: H3Event,
+): Promise<EventCreateResponse> {
   requireOrganizerRole(serverEvent);
   const event = await validateRequest(serverEvent, EventCreateSchema);
 
@@ -22,7 +26,7 @@ export default defineEventHandler(async (serverEvent) => {
   });
   await newEvent.save();
 
-  const res: EventCreateResponse = newEvent;
+  return newEvent;
+}
 
-  return res;
-});
+export default createTypedRoute(defineEventHandler);
