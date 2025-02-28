@@ -4,7 +4,6 @@ definePageMeta({
 });
 
 const { user, clear: clearSession } = useUserSession();
-console.log(user);
 
 const sex = defineModel<string>("sex", { default: "Не дали" });
 

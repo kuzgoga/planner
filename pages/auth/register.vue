@@ -1,7 +1,6 @@
 <script setup lang="ts">
-import type { LoginResponse } from "~/server/models/login";
-import type { ResponseError } from "~/server/models/error";
 import type { SignUpResponse } from "~/server/models/signup";
+import type { ResponseError } from "~/server/models/error";
 
 const fullName = defineModel<string>("fullName");
 const email = defineModel<string>("email");
@@ -40,22 +39,25 @@ const handleRegister = async () => {
     return;
   }
 
-  const response = await useFetch<SignUpResponse>("/api/auth/signup", {
-    method: "POST",
-    body: {
-      firstName,
-      lastName,
-      email: email.value,
-      password: password.value,
-    },
-  });
-
-  if (response.error.value) {
-    showError(response.error.value.data?.message || "Неизвестная ошибка");
+  try {
+    await $fetch<SignUpResponse>("/api/auth/signup", {
+      method: "POST",
+      body: {
+        firstName,
+        lastName,
+        email: email.value,
+        password: password.value,
+      },
+    });
+  } catch (error) {
+    const responseError = error as { data: ResponseError };
+    const errorMessage =
+      responseError.data?.statusMessage || "Неизвестная ошибка";
+    showError(errorMessage);
     return;
-  } else {
-    await navigateTo("/");
   }
+
+  await navigateTo("/", { external: true });
 };
 </script>
 

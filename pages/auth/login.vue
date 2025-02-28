@@ -29,17 +29,20 @@ const handleLogin = async () => {
     return;
   }
 
-  const response = await useFetch<LoginResponse>("/api/auth/login", {
-    method: "POST",
-    body: { email: email.value, password: password.value },
-  });
-
-  if (response.error.value) {
-    showError(response.error.value.data?.message || "Неизвестная ошибка");
+  try {
+    await $fetch<LoginResponse>("/api/auth/login", {
+      method: "POST",
+      body: { email: email.value, password: password.value },
+    });
+  } catch (error) {
+    const responseError = error as { data: ResponseError };
+    const errorMessage =
+      responseError.data?.statusMessage || "Неизвестная ошибка";
+    showError(errorMessage);
     return;
-  } else {
-    await navigateTo("/");
   }
+
+  await navigateTo("/", { external: true });
 };
 </script>
 
