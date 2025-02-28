@@ -52,7 +52,7 @@ const handleLogin = async () => {
 
 <template>
   <div
-    class="relative w-screen h-dvh -mt-12 overflow-hidden flex flex-col justify-center items-center"
+    class="relative w-screen h-dvh overflow-hidden flex flex-col justify-center items-center"
   >
     <IconsLoginTitle />
     <TextInput v-model="email" placeholder="Введите почту" class="mt-[82px]" />

@@ -10,7 +10,9 @@ export default defineNuxtConfig({
     "@nuxt/fonts",
     "@nuxt/icon",
   ],
-
+  devtools: {
+    enabled: true
+  },
   nitro: {
     experimental: {
       openAPI: true,

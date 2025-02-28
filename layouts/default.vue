@@ -5,6 +5,7 @@
       'top-0': show,
     }" v-model="show"></Menu>
     <button @click="show = true">show</button>
+    <header></header>
     <slot />
   </div>
 </template>
