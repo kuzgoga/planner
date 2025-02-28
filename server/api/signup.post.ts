@@ -21,9 +21,10 @@ export default defineEventHandler(async (event) => {
   });
   await newUser.save();
 
+  const name = `${result.data.firstName} ${result.data.lastName}`;
   await setUserSession(event, {
     user: {
-      name: `${result.data.firstName} ${result.data.lastName}`,
+      name: name,
       role: newUser.role,
     },
   });
