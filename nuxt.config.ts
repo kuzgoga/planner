@@ -1,5 +1,12 @@
 export default defineNuxtConfig({
-  modules: ["@scalar/nuxt", "nuxt-jwt-auth", "nuxt-typeorm"],
+  modules: [
+    "@scalar/nuxt",
+    "nuxt-jwt-auth",
+    "nuxt-typeorm",
+    "@pinia/nuxt",
+    "@nuxt/image",
+    "@nuxtjs/tailwindcss",
+  ],
 
   nitro: {
     experimental: {
@@ -48,4 +55,11 @@ export default defineNuxtConfig({
   },
 
   compatibilityDate: "2025-02-27",
+  
+  vite: {
+    server: {
+      allowedHosts: true
+    }
+  },
+  
 });
