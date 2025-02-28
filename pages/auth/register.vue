@@ -1,9 +1,12 @@
 <script setup lang="ts">
 import type { LoginResponse } from "~/server/models/login";
 import type { ResponseError } from "~/server/models/error";
+import type { SignUpResponse } from "~/server/models/signup";
 
+const fullName = defineModel<string>("fullName");
 const email = defineModel<string>("email");
 const password = defineModel<string>("password");
+const repeatPassword = defineModel<string>("repeatPassword");
 const errorTimeout = ref<NodeJS.Timeout>();
 const errorText = ref<string>("");
 
@@ -20,18 +23,31 @@ const validateEmail = (email: string): boolean => {
   return emailRegex.test(email);
 };
 
-const handleLogin = async () => {
-  if (!validateEmail(email.value || "")) {
+const handleRegister = async () => {
+  const [firstName, lastName] = (fullName.value || "").split(" ");
+
+  if (!firstName || !lastName) {
+    showError("Введите имя и фамилию через пробел");
+    return;
+  } else if (!validateEmail(email.value || "")) {
     showError("Введите корректный адрес электронной почты");
     return;
   } else if (!password.value) {
     showError("Введите пароль");
     return;
+  } else if (password.value !== repeatPassword.value) {
+    showError("Пароли не совпадают");
+    return;
   }
 
-  const response = await useFetch<LoginResponse>("/api/auth/login", {
+  const response = await useFetch<SignUpResponse>("/api/auth/signup", {
     method: "POST",
-    body: { email: email.value, password: password.value },
+    body: {
+      firstName,
+      lastName,
+      email: email.value,
+      password: password.value,
+    },
   });
 
   if (response.error.value) {
@@ -45,22 +61,33 @@ const handleLogin = async () => {
 
 <template>
   <div
-    class="relative w-screen h-dvh -mt-12 overflow-hidden flex flex-col justify-center items-center"
+    class="relative w-screen h-dvh overflow-hidden flex flex-col justify-center items-center"
   >
-    <IconsLoginTitle />
-    <TextInput v-model="email" placeholder="Введите почту" class="mt-[82px]" />
+    <IconsRegisterTitle />
+    <TextInput
+      v-model="fullName"
+      placeholder="Введите имя и фамилию"
+      class="mt-6"
+    />
+    <TextInput v-model="email" placeholder="Введите почту" class="mt-6" />
     <TextInput
       type="password"
       v-model="password"
       placeholder="Введите пароль"
       class="mt-6"
     />
-    <PrimaryButton class="mt-12" @click="handleLogin">
-      <template #title>Войти на платформу</template>
+    <TextInput
+      type="password"
+      v-model="repeatPassword"
+      placeholder="Повторите пароль"
+      class="mt-6"
+    />
+    <PrimaryButton class="mt-6" @click="handleRegister">
+      <template #title>Зарегистрироваться</template>
       <template #description>Доступно только для отличников</template>
     </PrimaryButton>
     <span class="text-center text-sm font-bold mt-1">
-      Нет аккаунта? <a href="/auth/register">Зарегистрироваться</a>
+      Уже есть аккаунт? <a href="/auth/login">Войти</a>
     </span>
     <span class="text-center text-sm font-bold text-red-500">
       &nbsp;{{ errorText }}&nbsp;
