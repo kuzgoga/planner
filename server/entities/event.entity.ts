@@ -22,14 +22,17 @@ export class Event extends BaseEntity {
   @Column({ type: "text" })
   preview_path: string;
 
-  @Column({ type: "timestamp" })
-  startTime: Date;
+  @Column({ type: "varchar" })
+  location: string;
 
   @Column({ type: "timestamp" })
-  endTime: Date;
+  start: Date;
 
-  @Column({ type: "bigint" })
-  likes: number;
+  @Column({ type: "timestamp" })
+  end: Date;
+
+  @Column("int", { array: true, default: [] })
+  likes: number[];
 
   @ManyToMany(() => User, (user) => user.events)
   @JoinTable()
