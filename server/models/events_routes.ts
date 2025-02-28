@@ -21,4 +21,8 @@ export type EventUpdateResponse = Event;
 
 export type GetEventByIdResponse = Event;
 
-export type GetAllEventsResponse = Event[];
+export interface GroupedEvents {
+  [key: string]: Event[];
+}
+
+export type GetAllEventsResponse = GroupedEvents;
