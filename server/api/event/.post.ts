@@ -9,7 +9,7 @@ export default defineEventHandler(async (serverEvent) => {
   requireOrganizerRole(serverEvent);
   const event = await validateRequest(serverEvent, EventCreateSchema);
 
-  const participants = await User.findBy({ id: In(event.userIds) });
+  const participants = await User.findBy({ id: In(event.participants) });
 
   const newEvent = Event.create({
     title: event.title,
