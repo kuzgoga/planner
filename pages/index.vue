@@ -1,5 +1,5 @@
 <script setup lang="ts">
-const sex = defineModel<string>("sex", { required: true, default: "Не дали" });
+const sex = defineModel<string>("sex", { default: "Не дали" });
 
 watch(sex, (newValue) => {
   console.log(newValue);
