@@ -8,6 +8,7 @@ export default defineNuxtConfig({
     "@nuxt/image",
     "nuxt-auth-utils",
     "@nuxt/fonts",
+    "@nuxt/icon",
   ],
 
   nitro: {
@@ -56,6 +57,12 @@ export default defineNuxtConfig({
     families: [{ name: "Nunito Sans", fallbacks: ["sans-serif"] }],
     experimental: {
       processCSSVariables: true,
+    },
+  },
+
+  icon: {
+    serverBundle: {
+      collections: ["material-symbols"],
     },
   },
 });

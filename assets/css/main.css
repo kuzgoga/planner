@@ -2,6 +2,10 @@
 
 @theme {
   --font-display: Nunito Sans, sans-serif;
+  --color-background: #e4e2d3;
+  --color-accent-red: #f77564;
+  --color-accent-yellow: #f8d082;
+  --color-gray: #111111;
 }
 
 * {
@@ -9,4 +13,8 @@
   padding: 0;
   box-sizing: border-box;
   font-family: var(--font-display);
+}
+
+body {
+  background-color: var(--color-background);
 }
