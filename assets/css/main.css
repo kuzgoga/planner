@@ -5,14 +5,17 @@
   --color-background: #e4e2d3;
   --color-accent-red: #f77564;
   --color-accent-yellow: #f8d082;
-  --color-gray: #111111;
+  --color-text-gray: #111111;
+  --color-border-gray: #898989;
 }
 
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: var(--font-display);
+@layer base {
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: var(--font-display);
+  }
 }
 
 body {
