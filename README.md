@@ -1,6 +1,7 @@
 # Minimal Starter
 
 TODO: Implement user authentication and authorization.
+
 TODO: Migrate from Sqlite to PostgreSQL.
 
 Look at the [Nuxt documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
