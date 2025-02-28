@@ -1,5 +1,5 @@
 <template>
-  <div class="w-screen h-screen bg-background">
+  <div class="w-screen h-screen bg-background flex flex-col">
     <Menu
       class="transition-[top]"
       :class="{
