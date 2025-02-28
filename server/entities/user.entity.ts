@@ -7,8 +7,17 @@ export class User extends BaseEntity {
   id: number;
 
   @Column({ type: "varchar" })
+  email: string;
+
+  @Column({ type: "varchar" })
   firstName: string;
 
   @Column({ type: "varchar" })
   lastName: string;
+
+  @Column({ type: "varchar" })
+  password_hash: string;
+
+  @Column({ type: "varchar" })
+  role: string;
 }
