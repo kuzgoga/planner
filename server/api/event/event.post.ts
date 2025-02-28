@@ -2,6 +2,7 @@ import { EventCreateSchema } from "../../models/create_event";
 import { Event } from "../../entities/event.entity";
 import { EventCreateResponse } from "../../models/create_event";
 import { requireOrganizerRole } from "../../utils/require_organizer_role";
+import { In } from "typeorm";
 
 export default defineEventHandler(async (event) => {
   requireOrganizerRole(event);
@@ -13,7 +14,7 @@ export default defineEventHandler(async (event) => {
 
   const eventData = result.data;
 
-  const participants = await User.findByIds(eventData.userIds);
+  const participants = await User.findBy({ id: In(eventData.userIds) });
 
   const newEvent = Event.create({
     title: eventData.title,
