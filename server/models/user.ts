@@ -8,4 +8,4 @@ export const UserSchema = z.object({
   email: z.string().email().max(128),
   role: z.enum(["PARTICIPANT", "ADMIN", "ORGANIZER"]),
 });
-export type UserType = z.infer<typeof UserSchema>;
+export type UserIn = z.infer<typeof UserSchema>;

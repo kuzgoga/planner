@@ -3,17 +3,19 @@ import { User } from "../entities/user.entity";
 import { GetAllUsersResponse } from "../models/get_all_users";
 
 export default defineEventHandler(async (event) => {
-  /* Get all users with search by email */
-  const keyphrase = getRouterParam(event, "keyphrase");
+  /* Get all users with search by email and name */
+  /* Use query parameter `keyphrase` to search by email, first name, and last name */
   const _ = await requireUserSession(event);
 
+  const query = getQuery(event);
+
   let users;
-  if (!keyphrase) {
+  if (!query.keyphrase) {
     users = await User.find({
       where: [
-        { email: ILike(keyphrase!!) },
-        { firstName: ILike(keyphrase!!) },
-        { lastName: ILike(keyphrase!!) },
+        { email: ILike(query.keyphrase!!.toString()) },
+        { firstName: ILike(query.keyphrase!!.toString()) },
+        { lastName: ILike(query.keyphrase!!.toString()) },
       ],
     });
   } else {
