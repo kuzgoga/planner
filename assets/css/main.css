@@ -5,6 +5,7 @@
   --color-background: #e4e2d3;
   --color-accent-red: #f67563;
   --color-accent-yellow: #fde1ab;
+  --color-accent-dark-yellow: #f7d082;
   --color-text-gray: #111111;
   --color-text-brown: #8c2f1b;
   --color-border-gray: #898989;
@@ -29,6 +30,3 @@
   }
 }
 
-body {
-  background-color: var(--color-background);
-}
