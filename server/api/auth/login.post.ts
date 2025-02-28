@@ -14,14 +14,14 @@ export default defineEventHandler(async (event) => {
   if (!user) {
     throw createError({
       statusCode: 401,
-      statusMessage: "Invalid credentials",
+      statusMessage: "Неверные учетные данные",
     });
   }
 
   if (!compareSync(loginAttempt.password, user.password_hash)) {
     throw createError({
       statusCode: 401,
-      statusMessage: "Invalid credentials",
+      statusMessage: "Неверные учетные данные",
     });
   }
 
