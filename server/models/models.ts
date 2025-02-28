@@ -19,3 +19,7 @@ export type SignUpRequest = z.infer<typeof SignUpRequestSchema>;
 export interface SignUpResponse {
   userId: number;
 }
+
+export interface PingResponse {
+  message: string;
+}

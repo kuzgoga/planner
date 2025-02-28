@@ -1,3 +1,6 @@
+import { PingResponse } from "../models/models";
+
 export default defineEventHandler(async (event) => {
-  return { message: "pong" };
+  const response: PingResponse = { message: "pong" };
+  return response;
 });
