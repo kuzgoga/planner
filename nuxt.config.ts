@@ -7,6 +7,7 @@ export default defineNuxtConfig({
     "@pinia/nuxt",
     "@nuxt/image",
     "nuxt-auth-utils",
+    "@nuxt/fonts",
   ],
 
   nitro: {
@@ -49,5 +50,12 @@ export default defineNuxtConfig({
       allowedHosts: true,
     },
     plugins: [tailwindcss()],
+  },
+
+  fonts: {
+    families: [{ name: "Nunito Sans", fallbacks: ["sans-serif"] }],
+    experimental: {
+      processCSSVariables: true,
+    },
   },
 });
