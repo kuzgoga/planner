@@ -1,10 +1,11 @@
+import tailwindcss from "@tailwindcss/vite";
+
 export default defineNuxtConfig({
   modules: [
     "@scalar/nuxt",
     "nuxt-typeorm",
     "@pinia/nuxt",
     "@nuxt/image",
-    "@nuxtjs/tailwindcss",
     "nuxt-auth-utils",
   ],
 
@@ -41,9 +42,12 @@ export default defineNuxtConfig({
 
   compatibilityDate: "2025-02-27",
 
+  css: ["~/assets/css/main.css"],
+
   vite: {
     server: {
       allowedHosts: true,
     },
+    plugins: [tailwindcss()],
   },
 });
