@@ -1,28 +1,28 @@
 <template>
   <div>
-    <div class="flex flex-col items-start top-4 relative">
+    <div
+      class="max-w-screen overflow-hidden flex flex-col items-start top-4 relative"
+    >
       <BackgroundText v-for="(phrase, index) in phrases" :key="index">{{
         phrase
       }}</BackgroundText>
     </div>
-    <div class="absolute bottom-10 w-full overflow-hidden h-72">
-      <NuxtImg
-        src="/svg/circles.svg"
-        class="absolute left-16 bottom-20 w-36"
-      ></NuxtImg>
-      <NuxtImg
-        src="/svg/ring.svg"
-        class="absolute right-0 bottom-10 rotate-45"
-      ></NuxtImg>
-      <PrimaryButton
-        class="absolute bottom-0 z-20"
-        @click="navigateTo('/auth/login')"
-      >
-        <template #title>
-          <h1>Далее</h1>
-        </template>
-      </PrimaryButton>
-    </div>
+    <NuxtImg
+      src="/svg/circles.svg"
+      class="fixed left-16 bottom-24 w-36"
+    ></NuxtImg>
+    <NuxtImg
+      src="/svg/ring.svg"
+      class="fixed right-0 bottom-14 rotate-45"
+    ></NuxtImg>
+    <PrimaryButton
+      class="fixed bottom-4 z-20"
+      @click="navigateTo('/auth/login')"
+    >
+      <template #title>
+        <h1>Далее</h1>
+      </template>
+    </PrimaryButton>
   </div>
 </template>
 
@@ -43,7 +43,7 @@ const phrases = [
   "Легенда",
   "Традиции",
   "Открытие",
-  "Стермпение",
+  "Стремление",
   "Энергия",
 ];
 </script>
