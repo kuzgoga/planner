@@ -1,35 +1,46 @@
-import { ILike } from "typeorm";
+import { Equal } from "typeorm";
 import { User } from "../entities/user.entity";
-import { GetAllUsersResponse } from "../models/get_all_users";
+import { GetUserByIdResponse } from "../models/get_user_by_id";
 
 export default defineEventHandler(async (event) => {
-  /* Get all users with search by email and name */
-  /* Use query parameter `keyphrase` to search by email, first name, and last name */
+  /* Get user by id */
   const _ = await requireUserSession(event);
 
   const query = getQuery(event);
 
-  let users;
-  if (!query.keyphrase) {
-    users = await User.find({
-      where: [
-        { email: ILike(query.keyphrase!!.toString()) },
-        { firstName: ILike(query.keyphrase!!.toString()) },
-        { lastName: ILike(query.keyphrase!!.toString()) },
-      ],
+  if (!query.id) {
+    throw createError({
+      statusCode: 400,
+      statusMessage: "Query parameter 'id' is required",
     });
-  } else {
-    users = await User.find();
   }
 
-  const response: GetAllUsersResponse = {
-    users: users.map((user) => ({
-      id: user.id,
-      firstName: user.firstName,
-      lastName: user.lastName,
-      email: user.email,
-      role: user.role,
-    })),
+  const userId = parseInt(query.id.toString(), 10);
+  if (isNaN(userId)) {
+    throw createError({
+      statusCode: 400,
+      statusMessage: "Query parameter 'id' must be a valid number",
+    });
+  }
+
+  const user = await User.findOne({
+    where: { id: Equal(userId) },
+  });
+
+  if (!user) {
+    throw createError({
+      statusCode: 404,
+      statusMessage: "User not found",
+    });
+  }
+
+  const response: GetUserByIdResponse = {
+    id: user.id,
+    firstName: user.firstName,
+    lastName: user.lastName,
+    email: user.email,
+    role: user.role,
   };
+
   return response;
 });

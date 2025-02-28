@@ -1,3 +1,3 @@
 export default defineEventHandler(async (event) => {
-  message: "not implemented";
+  const query = getQuery(event);
 });
