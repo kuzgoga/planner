@@ -20,3 +20,5 @@ export type EventUpdate = z.infer<typeof EventUpdateSchema>;
 export type EventUpdateResponse = Event;
 
 export type GetEventByIdResponse = Event;
+
+export type GetAllEventsResponse = Event[];
