@@ -1,35 +1,32 @@
-import { SignUpRequestSchema } from "../../models/signup";
+import { SignUpRequestSchema, SignUpResponse } from "../../models/signup";
 import { User } from "../../entities/user.entity";
 import "dotenv/config";
 import { genSaltSync, hashSync } from "bcrypt-ts";
 
 export default defineEventHandler(async (event) => {
-  const result = await readValidatedBody(event, (body) =>
-    SignUpRequestSchema.safeParse(body),
-  );
-
-  if (!result.success) throw result.error.issues;
+  const signupAttempt = await validateRequest(event, SignUpRequestSchema);
 
   const salt = genSaltSync(Number(process.env.SALT_ROUNDS));
-  const password_hash = hashSync(result.data.password, salt);
+  const password_hash = hashSync(signupAttempt.password, salt);
 
   const newUser = User.create({
-    firstName: result.data.firstName,
-    lastName: result.data.lastName,
-    email: result.data.email,
+    firstName: signupAttempt.firstName,
+    lastName: signupAttempt.lastName,
+    email: signupAttempt.email,
     password_hash: password_hash,
     role: Role.PARTICIPANT,
   });
   await newUser.save();
 
-  const name = `${result.data.firstName} ${result.data.lastName}`;
+  const name = `${signupAttempt.firstName} ${signupAttempt.lastName}`;
   await setUserSession(event, {
     user: {
+      id: newUser.id,
       name: name,
       role: newUser.role,
     },
   });
 
-  const response = { id: newUser.id };
+  const response: SignUpResponse = { id: newUser.id };
   return response;
 });

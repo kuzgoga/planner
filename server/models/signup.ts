@@ -10,5 +10,5 @@ export const SignUpRequestSchema = z.object({
 export type SignUpRequest = z.infer<typeof SignUpRequestSchema>;
 
 export type SignUpResponse = {
-  userId: number;
+  id: number;
 };

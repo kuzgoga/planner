@@ -1,14 +1,11 @@
+import { H3Event, EventHandlerRequest } from "h3";
+import { ZodObject, ZodString, ZodTypeAny } from "zod";
 import { LoginRequestSchema, LoginResponse } from "../../models/login";
 import { compareSync } from "bcrypt-ts";
+import { validateRequest } from "../../utils/validate_request";
 
 export default defineEventHandler(async (event) => {
-  const result = await readValidatedBody(event, (body) =>
-    LoginRequestSchema.safeParse(body),
-  );
-
-  if (!result.success) throw result.error.issues;
-
-  const loginAttempt = result.data;
+  const loginAttempt = await validateRequest(event, LoginRequestSchema);
   const user = await User.findOneBy({ email: loginAttempt.email });
 
   if (!user) {
@@ -29,6 +26,7 @@ export default defineEventHandler(async (event) => {
 
   await setUserSession(event, {
     user: {
+      id: user.id,
       name: name,
       role: user.role,
     },
