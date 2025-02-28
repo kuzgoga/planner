@@ -1,4 +1,4 @@
-import { LoginRequestSchema, LoginResponse } from "../models/models";
+import { LoginRequestSchema, LoginResponse } from "../../models/login";
 import { compareSync } from "bcrypt-ts";
 
 export default defineEventHandler(async (event) => {
@@ -13,14 +13,14 @@ export default defineEventHandler(async (event) => {
 
   if (!user) {
     throw createError({
-      statusCode: 403,
+      statusCode: 401,
       statusMessage: "Invalid credentials",
     });
   }
 
   if (!compareSync(loginAttempt.password, user.password_hash)) {
     throw createError({
-      statusCode: 403,
+      statusCode: 401,
       statusMessage: "Invalid credentials",
     });
   }

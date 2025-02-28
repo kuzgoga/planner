@@ -1,5 +1,5 @@
-import { SignUpRequestSchema } from "../models/models";
-import { User } from "../entities/user.entity";
+import { SignUpRequestSchema } from "../../models/signup";
+import { User } from "../../entities/user.entity";
 import "dotenv/config";
 import { genSaltSync, hashSync } from "bcrypt-ts";
 
