@@ -1,6 +1,6 @@
-import { EventCreateSchema } from "../../models/create_event";
+import { EventCreateSchema } from "../../models/events_routes";
 import { Event } from "../../entities/event.entity";
-import { EventCreateResponse } from "../../models/create_event";
+import { EventCreateResponse } from "../../models/events_routes";
 import { requireOrganizerRole } from "../../utils/require_organizer_role";
 import { In } from "typeorm";
 import { validateRequest } from "../../utils/validate_request";

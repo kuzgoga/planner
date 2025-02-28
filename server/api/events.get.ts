@@ -1,3 +1,1 @@
-export default defineEventHandler(async (event) => {
-  const query = getQuery(event);
-});
+export default defineEventHandler(async (event) => {});

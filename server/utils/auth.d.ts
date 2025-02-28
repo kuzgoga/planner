@@ -5,13 +5,9 @@ declare module "#auth-utils" {
     role: string;
   }
 
-  interface UserSession {
-    // Add your own fields
-  }
+  interface UserSession {}
 
-  interface SecureSessionData {
-    // Add your own fields
-  }
+  interface SecureSessionData {}
 }
 
 export {};

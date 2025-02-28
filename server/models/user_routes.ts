@@ -9,3 +9,10 @@ export const UserSchema = z.object({
   role: z.enum(["PARTICIPANT", "ADMIN", "ORGANIZER"]),
 });
 export type UserIn = z.infer<typeof UserSchema>;
+
+export type GetAllUsersRequest = {};
+export type GetAllUsersResponse = {
+  users: UserIn[];
+};
+
+export type GetUserByIdResponse = UserIn;

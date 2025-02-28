@@ -18,3 +18,5 @@ export type EventCreateResponse = Event;
 export const EventUpdateSchema = EventCreateSchema.partial();
 export type EventUpdate = z.infer<typeof EventUpdateSchema>;
 export type EventUpdateResponse = Event;
+
+export type GetEventByIdResponse = Event;

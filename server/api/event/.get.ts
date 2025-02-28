@@ -1,7 +1,7 @@
 import { getIdFromEvent } from "../../utils/extract_id_query_param";
 import { Event } from "../../entities/event.entity";
 import { Equal } from "typeorm";
-import { GetEventByIdResponse } from "~/server/models/get_event_by_id";
+import { GetEventByIdResponse } from "~/server/models/events_routes";
 import { requireOrganizerRole } from "../../utils/require_organizer_role";
 
 export default defineEventHandler(async (event) => {
