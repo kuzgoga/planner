@@ -22,7 +22,9 @@ export type EventUpdateResponse = Event;
 export type GetEventByIdResponse = Event;
 
 export interface GroupedEvents {
-  [key: string]: Event[];
+  [key: string]: {
+    [key: number]: Event[];
+  };
 }
 
-export type GetAllEventsResponse = GroupedEvents;
+export type GetFutureEventsResponse = GroupedEvents;
