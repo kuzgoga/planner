@@ -2,6 +2,10 @@
 import type { LoginResponse } from "~/server/models/login";
 import type { ResponseError } from "~/server/models/error";
 
+definePageMeta({
+  layout: 'auth'
+})
+
 const email = defineModel<string>("email");
 const password = defineModel<string>("password");
 const errorTimeout = ref<NodeJS.Timeout>();

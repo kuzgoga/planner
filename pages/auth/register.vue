@@ -2,6 +2,10 @@
 import type { SignUpResponse } from "~/server/models/signup";
 import type { ResponseError } from "~/server/models/error";
 
+definePageMeta({
+  layout: 'auth'
+})
+
 const fullName = defineModel<string>("fullName");
 const email = defineModel<string>("email");
 const password = defineModel<string>("password");
