@@ -18,6 +18,7 @@ export default defineEventHandler(async (event) => {
     lastName: result.data.lastName,
     email: result.data.email,
     password_hash: password_hash,
+    role: Role.PARTICIPANT,
   });
   await newUser.save();
 
