@@ -3,10 +3,21 @@
 @theme {
   --font-display: Nunito Sans, sans-serif;
   --color-background: #e4e2d3;
-  --color-accent-red: #f77564;
-  --color-accent-yellow: #f8d082;
+  --color-accent-red: #f67563;
+  --color-accent-yellow: #fde1ab;
   --color-text-gray: #111111;
+  --color-text-brown: #8c2f1b;
   --color-border-gray: #898989;
+}
+
+@layer components {
+  * {
+    @apply text-text-gray;
+  }
+
+  a {
+    @apply text-text-brown underline;
+  }
 }
 
 @layer base {
