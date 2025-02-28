@@ -23,7 +23,10 @@ export class Event extends BaseEntity {
   preview_path: string;
 
   @Column({ type: "timestamp" })
-  time: Date;
+  startTime: Date;
+
+  @Column({ type: "timestamp" })
+  endTime: Date;
 
   @Column({ type: "bigint" })
   likes: number;

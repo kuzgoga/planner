@@ -1,8 +1,7 @@
 import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
 import { BaseEntity } from "typeorm";
-import { OneToMany } from "typeorm/browser";
 import { User } from "./user.entity";
-import { ManyToOne } from "typeorm/browser";
+import { ManyToOne } from "typeorm";
 
 @Entity()
 export class Comment extends BaseEntity {
@@ -15,6 +14,6 @@ export class Comment extends BaseEntity {
   @Column({ type: "text" })
   content: string;
 
-  @Column({ type: "timestamptz" })
+  @Column({ type: "timestamptz", default: "now()" })
   created_at: Date;
 }
