@@ -22,5 +22,8 @@
   },
   "devDependencies": {
     "nuxt-jwt-auth": "^1.0.0"
-  }
+  },
+  "trustedDependencies": [
+    "@parcel/watcher"
+  ]
 }
