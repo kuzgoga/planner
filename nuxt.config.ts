@@ -10,9 +10,10 @@ export default defineNuxtConfig({
     "@nuxt/fonts",
     "@nuxt/icon",
     "vue3-carousel-nuxt",
+    "nuxt-file-storage",
   ],
   devtools: {
-    enabled: true
+    enabled: true,
   },
   nitro: {
     experimental: {
@@ -47,6 +48,12 @@ export default defineNuxtConfig({
     database: "planner",
     synchronize: true,
     logging: true,
+    migrations: ["./migrations/*.ts"],
+    migrationsRun: true,
+  },
+
+  fileStorage: {
+    mount: process.env.mount,
   },
 
   compatibilityDate: "2025-02-27",

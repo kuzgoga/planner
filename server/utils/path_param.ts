@@ -1,18 +1,18 @@
 import { H3Event, createError } from "h3";
 import { CastFunction } from "./cast";
 
-function getRequiredQueryParam<T>(
+function getRequiredPathParam<T>(
   event: H3Event,
   paramName: string,
   castFn: CastFunction<T>,
 ): T {
-  const queryParams = getQuery(event);
-  const paramValue = queryParams[paramName];
+  const params = event.context.params || {};
+  const paramValue = params[paramName];
 
-  if (!paramValue) {
+  if (paramValue === undefined) {
     throw createError({
       statusCode: 400,
-      statusMessage: `Query parameter "${paramName}" is required`,
+      statusMessage: `Path parameter "${paramName}" is required`,
     });
   }
 
@@ -21,21 +21,21 @@ function getRequiredQueryParam<T>(
   } catch (error) {
     throw createError({
       statusCode: 400,
-      statusMessage: `Query parameter "${paramName}" is invalid: ${error}`,
+      statusMessage: `Path parameter "${paramName}" is invalid: ${error}`,
     });
   }
 }
 
-function getOptionalQueryParam<T>(
+function getOptionalPathParam<T>(
   event: H3Event,
   paramName: string,
   castFn: CastFunction<T>,
   defaultValue?: T,
 ): T | undefined {
-  const queryParams = getQuery(event);
-  const paramValue = queryParams[paramName];
+  const params = event.context.params || {};
+  const paramValue = params[paramName];
 
-  if (!paramValue) {
+  if (paramValue === undefined) {
     return defaultValue;
   }
 
@@ -44,9 +44,9 @@ function getOptionalQueryParam<T>(
   } catch (error) {
     throw createError({
       statusCode: 400,
-      statusMessage: `Query parameter "${paramName}" is invalid: ${error}`,
+      statusMessage: `Path parameter "${paramName}" is invalid: ${error}`,
     });
   }
 }
 
-export { getRequiredQueryParam, getOptionalQueryParam };
+export { getRequiredPathParam, getOptionalPathParam };

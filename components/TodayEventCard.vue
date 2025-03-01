@@ -9,22 +9,28 @@ defineProps<{
   color: string;
 }>();
 
-const formatDuration = (start: Date, end: Date) => {
+const formatDuration = (start: Date, end: Date): string => {
   const durationInMinutes = Math.floor(
     (end.getTime() - start.getTime()) / (1000 * 60),
   );
+
   const hours = Math.floor(durationInMinutes / 60);
   const minutes = durationInMinutes % 60;
+
+  const hourText =
+    hours % 10 === 1 && hours % 100 !== 11
+      ? "час"
+      : hours % 10 >= 2 &&
+          hours % 10 <= 4 &&
+          (hours % 100 < 10 || hours % 100 >= 20)
+        ? "часа"
+        : "часов";
 
   if (hours === 0) {
     return `${minutes} мин`;
   } else if (minutes === 0) {
-    const hourText =
-      hours === 1 ? "час" : hours >= 2 && hours <= 4 ? "часа" : "часов";
     return `${hours} ${hourText}`;
   } else {
-    const hourText =
-      hours === 1 ? "час" : hours >= 2 && hours <= 4 ? "часа" : "часов";
     return `${hours} ${hourText} ${minutes} мин`;
   }
 };
@@ -42,7 +48,7 @@ const formatDuration = (start: Date, end: Date) => {
         <span class="text-sm font-bold text-text-gray/65">{{ likes }}</span>
         <Icon
           name="material-symbols:favorite-outline"
-          class="text-text-gray/65 w-[22px] h-[22px]"
+          class="text-text-gray/65 w-[22px] h-[22px] static"
         />
       </div>
     </div>

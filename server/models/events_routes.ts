@@ -27,11 +27,25 @@ export type EventUpdateResponse = EventUpdate;
 
 export type GetEventByIdResponse = Event;
 
-export interface GroupedEvents {
-  [key: string]: {
-    [key: number]: Event[];
+export type Month =
+  | "ЯНВ"
+  | "ФЕВ"
+  | "МАР"
+  | "АПР"
+  | "МАЙ"
+  | "ИЮН"
+  | "ИЮЛ"
+  | "АВГ"
+  | "СЕН"
+  | "ОКТ"
+  | "НОЯ"
+  | "ДЕК";
+
+export type GroupedEvents = {
+  [M in Month]?: {
+    [day: number]: Event[];
   };
-}
+};
 
 export type GetFutureEventsResponse = GroupedEvents;
 
