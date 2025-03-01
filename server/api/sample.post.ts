@@ -54,7 +54,7 @@ async function addEvents() {
       location: "Кемерово",
       preview_path:
         "https://ir-5.ozone.ru/s3/multimedia-t/wc1000/6832978517.jpg",
-      likes: [],
+      likes: [1],
       participants: await User.findBy({ id: In([1]) }),
     }).save();
 
@@ -66,7 +66,7 @@ async function addEvents() {
       location: "г.Кемерово, ул Красная 5А",
       preview_path:
         "https://ir-5.ozone.ru/s3/multimedia-t/wc1000/6832978517.jpg",
-      likes: [],
+      likes: [2],
       participants: await User.findBy({ id: In([2]) }),
     }).save();
 
@@ -78,7 +78,7 @@ async function addEvents() {
       location: "г. Кемерово, жилой район Кедровка, ул. Ленина 1А",
       preview_path:
         "https://ir-5.ozone.ru/s3/multimedia-t/wc1000/6832978517.jpg",
-      likes: [],
+      likes: [3],
       participants: await User.findBy({ id: In([1]) }),
     }).save();
 
