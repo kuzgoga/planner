@@ -9,6 +9,7 @@ export default defineNuxtConfig({
     "nuxt-auth-utils",
     "@nuxt/fonts",
     "@nuxt/icon",
+    "vue3-carousel-nuxt",
   ],
   devtools: {
     enabled: true
