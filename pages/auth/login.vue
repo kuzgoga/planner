@@ -68,7 +68,7 @@ const handleLogin = async () => {
     </PrimaryButton>
     <span class="text-center text-sm font-bold mt-1">
       Нет аккаунта?
-      <NuxtLink to="/auth/register">Зарегистрироваться</NuxtLink>
+      <NuxtLink class="text-text-brown underline" to="/auth/register">Зарегистрироваться</NuxtLink>
     </span>
     <span class="text-center text-sm font-bold text-red-500">
       &nbsp;{{ errorText }}&nbsp;

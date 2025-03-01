@@ -18,10 +18,6 @@
   * {
     @apply text-text-gray;
   }
-
-  a {
-    @apply text-text-brown underline;
-  }
 }
 
 @layer base {
