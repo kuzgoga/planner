@@ -1,5 +1,32 @@
 <script setup lang="ts">
+import type {
+  GetFutureEventsResponse,
+  GroupedEvents,
+} from "~/server/models/events_routes";
+
+definePageMeta({
+  middleware: ["authenticated"],
+});
+
 const now = ref(new Date());
+
+const { data: events, error } =
+  await useFetch<GetFutureEventsResponse>("/api/events");
+const eventsData = (error.value ? {} : events.value) as GetFutureEventsResponse;
+
+const todayEvents = computed(() => {
+  const month = now.value
+    .toLocaleString("ru", { month: "short" })
+    .toUpperCase()
+    .slice(0, 3);
+
+  const currentMonthEvents = eventsData[month as keyof GroupedEvents] || {};
+  const currentDay = now.value.getDate();
+
+  return currentMonthEvents[currentDay] || [];
+});
+
+const eventColors = ["#BBE19E", "#FDE1AB", "#F4B0C0"];
 
 onMounted(() => {
   const timer = setInterval(() => {
@@ -13,7 +40,9 @@ onMounted(() => {
   <div class="ml-6 mt-5 text-text-gray/85 text-base font-semibold capitalize">
     <span>{{ now.toLocaleString("ru", { weekday: "long" }) }}</span>
   </div>
-  <div class="w-full px-6 flex flex-row justify-between items-center text-[64px]/16 font-semibold">
+  <div
+    class="w-full px-6 flex flex-row justify-between items-center text-[64px]/16 font-semibold"
+  >
     <div class="flex flex-col">
       <span class="text-text-gray/85">
         {{ now.toLocaleDateString("ru", { day: "2-digit", month: "2-digit" }) }}
@@ -34,22 +63,26 @@ onMounted(() => {
       </span>
     </div>
   </div>
-  <section class="grow w-full mt-4 bg-white rounded-t-[35px] p-6 flex flex-col gap-2">
+  <section
+    class="grow w-full mt-4 bg-white rounded-t-[35px] p-6 flex flex-col gap-2"
+  >
     <span class="text-text-gray text-xl font-bold mb-2">
       Мероприятия сегодня
     </span>
-    <TodayEventCard :id="1" title="Арт-весна"
-      description="Задача организации, в особенности же начало повседневной работы по формированию позиции требуют от нас анализа форм развития. Таким образом новая модель организационной деятельности позволяет  выполнять важные задания по разработке позиций, занимаемых участниками в отношении поставленных задач."
-      :start-date="new Date('2025-02-28T14:00:00')" :end-date="new Date('2025-02-28T16:00:00')" :likes="932"
-      color="#BBE19E" />
-    <TodayEventCard :id="2" title="Арт-весна"
-      description="Задача организации, в особенности же начало повседневной работы по формированию позиции требуют от нас анализа форм развития. Таким образом новая модель организационной деятельности позволяет  выполнять важные задания по разработке позиций, занимаемых участниками в отношении поставленных задач."
-      :start-date="new Date('2025-02-28T14:00:00')" :end-date="new Date('2025-02-28T16:00:00')" :likes="932"
-      color="#FDE1AB" />
-    <TodayEventCard :id="3" title="Арт-весна"
-      description="Задача организации, в особенности же начало повседневной работы по формированию позиции требуют от нас анализа форм развития. Таким образом новая модель организационной деятельности позволяет  выполнять важные задания по разработке позиций, занимаемых участниками в отношении поставленных задач."
-      :start-date="new Date('2025-02-28T14:00:00')" :end-date="new Date('2025-02-28T16:00:00')" :likes="932"
-      color="#F4B0C0" />
+    <TodayEventCard
+      v-for="(event, index) in todayEvents"
+      :key="event.id"
+      :id="event.id"
+      :title="event.title"
+      :description="event.description"
+      :start-date="new Date(event.start)"
+      :end-date="new Date(event.end)"
+      :likes="event.likes.length"
+      :color="eventColors[index % eventColors.length]"
+    />
+    <div v-if="!todayEvents.length" class="text-center py-4 text-text-gray/70">
+      Нет мероприятий на сегодня
+    </div>
   </section>
 </template>
 
