@@ -31,7 +31,7 @@ const eventColors = ["#BBE19E", "#FDE1AB", "#F4B0C0"];
     <span class="text-text-gray text-xl font-bold mb-2">
       Мероприятия сегодня
     </span>
-    <TodayEventCard
+    <AvailableEventCard
       v-for="(event, index) in flattenEvents"
       :key="event.id"
       :id="event.id"

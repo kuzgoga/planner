@@ -38,7 +38,7 @@ const formatDuration = (start: Date, end: Date): string => {
 
 <template>
   <NuxtLink
-    class="w-full h-[172px] flex flex-col items-center px-4 py-2 rounded-[25px] cursor-pointer no-underline"
+    class="w-full min-h-[172px] flex flex-col items-center px-4 py-2 rounded-[25px] cursor-pointer no-underline"
     :style="{ backgroundColor: color }"
     :to="`/events/${id}`"
   >
