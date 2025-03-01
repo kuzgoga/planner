@@ -20,7 +20,7 @@ async function defineEventHandler(
   }
 
   const requestedEvent = await Event.findOne({
-    relations: { participants: false },
+    relations: { participants: true },
     where: { id: Equal(parseInt(eventId)) },
   });
 
