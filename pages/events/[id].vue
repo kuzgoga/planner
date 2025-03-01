@@ -13,14 +13,37 @@ const eventResponse = await useFetch<GetEventByIdResponse>("/api/event/" + id);
 if (!eventResponse.data.value) {
   throw createError({ statusCode: 404, statusMessage: "Event not found" });
 }
-const event = eventResponse.data.value;
+const event = ref(eventResponse.data.value);
 
 const participates = computed(() =>
-  event.participants.some((p) => p.id === user?.value?.id),
+  event.value.participants.some((p) => p.id === user?.value?.id),
 );
 
 const handleParticipation = async () => {
   if (!user.value) return;
+  console.log(participates.value);
+
+  if (participates.value) {
+    try {
+      await $fetch("/api/event/leave/" + id, {
+        method: "POST",
+      });
+      event.value.participants = event.value.participants.filter(
+        (p) => p.id !== user.value?.id,
+      );
+    } catch (error) {
+      console.error(error);
+    }
+  } else {
+    try {
+      await $fetch("/api/event/join/" + id, {
+        method: "POST",
+      });
+      event.value.participants.push(user.value);
+    } catch (error) {
+      console.error(error);
+    }
+  }
 };
 </script>
 
@@ -49,6 +72,7 @@ const handleParticipation = async () => {
     <button
       class="w-fit h-fit px-5 py-2 text-text-gray/85 border border-text-gray/85 rounded-xl text-sm font-bold cursor-pointer"
       :class="{ 'bg-accent-red': !participates }"
+      @click="handleParticipation"
     >
       <span v-if="participates">Вы участвуете</span>
       <span v-else-if="user?.role === 'ORGANIZER'">
@@ -56,7 +80,9 @@ const handleParticipation = async () => {
       </span>
       <span v-else>Принять участие</span>
     </button>
-    <button
+    <a
+      download
+      :href="`/api/event/export/${event.id}`"
       class="flex justify-center items-center p-2 rounded-xl bg-transparent border border-text-gray cursor-pointer"
     >
       <Icon
@@ -64,7 +90,7 @@ const handleParticipation = async () => {
         size="19px"
         class="w-[19px] h-[19px]"
       />
-    </button>
+    </a>
   </div>
   <div
     class="mt-4 w-full grow flex flex-col gap-2 p-6 bg-white rounded-t-[35px]"

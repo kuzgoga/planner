@@ -10,16 +10,8 @@ definePageMeta({
 });
 
 const { data: events, error } =
-  await useFetch<GetFutureEventsResponse>("/api/events");
-const eventsData = (error.value ? {} : events.value) as GetFutureEventsResponse;
-
-const flattenEvents = computed(() => {
-  if (!eventsData) return [];
-
-  return Object.values(eventsData).flatMap((dateEvents) =>
-    Object.values(dateEvents || {}).flat(),
-  );
-});
+  await useFetch<GetFutureEventsResponse>("/api/event/all");
+const eventsData = (error.value ? [] : events.value) as Event[];
 
 const eventColors = ["#BBE19E", "#FDE1AB", "#F4B0C0"];
 </script>
@@ -32,7 +24,7 @@ const eventColors = ["#BBE19E", "#FDE1AB", "#F4B0C0"];
       Мероприятия сегодня
     </span>
     <AvailableEventCard
-      v-for="(event, index) in flattenEvents"
+      v-for="(event, index) in eventsData"
       :key="event.id"
       :id="event.id"
       :title="event.title"
@@ -42,10 +34,7 @@ const eventColors = ["#BBE19E", "#FDE1AB", "#F4B0C0"];
       :likes="event.likes.length"
       :color="eventColors[index % eventColors.length]"
     />
-    <div
-      v-if="!flattenEvents.length"
-      class="text-center py-4 text-text-gray/70"
-    >
+    <div v-if="!eventsData.length" class="text-center py-4 text-text-gray/70">
       Нет мероприятий на сегодня
     </div>
   </section>
