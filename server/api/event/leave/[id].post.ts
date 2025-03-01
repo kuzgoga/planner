@@ -32,6 +32,12 @@ async function leaveEvent(event: H3Event): Promise<void> {
   }
 
   await currentEvent.save();
+
+  await sendNotification(
+    newParticipant.email,
+    "Платформа задач 'Планнер'",
+    `Вы покинули мероприятие ${currentEvent.title}.`,
+  );
 }
 
 export default createTypedRoute(leaveEvent);

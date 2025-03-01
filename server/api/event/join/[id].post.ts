@@ -31,6 +31,12 @@ async function joinEvent(event: H3Event): Promise<void> {
 
   currentEvent.participants.push(newParticipant);
   await currentEvent.save();
+
+  await sendNotification(
+    newParticipant.email,
+    "Платформа задач 'Планнер'",
+    `Вы присоединились к мероприятию ${currentEvent.title}.`,
+  );
 }
 
 export default createTypedRoute(joinEvent);
