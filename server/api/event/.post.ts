@@ -11,6 +11,8 @@ import { H3Event, EventHandlerRequest } from "h3";
 import { createTypedRoute } from "../../utils/typed_route";
 import { EventCreateRequestSchema } from "../../models/events_routes";
 import { ref } from "vue";
+import { Role } from "~/server/models/role";
+
 
 async function defineEventHandler(
   serverEvent: H3Event,

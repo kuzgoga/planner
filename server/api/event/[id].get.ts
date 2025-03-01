@@ -5,6 +5,8 @@ import { GetEventByIdResponse } from "~/server/models/events_routes";
 import { requireOrganizerRole } from "../../utils/require_organizer_role";
 import { H3Event, EventHandlerRequest } from "h3";
 import { createTypedRoute } from "../../utils/typed_route";
+import { Role } from "~/server/models/role";
+
 
 async function defineEventHandler(
   event: H3Event,

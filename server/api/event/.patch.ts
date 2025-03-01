@@ -6,6 +6,7 @@ import { In } from "typeorm";
 import { validateRequest } from "../../utils/validate_request";
 import { H3Event, EventHandlerRequest } from "h3";
 import { createTypedRoute } from "../../utils/typed_route";
+import { Role } from "~/server/models/role";
 
 async function defineEventHandler(
   serverEvent: H3Event,

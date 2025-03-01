@@ -11,6 +11,7 @@ export default defineNuxtConfig({
     "@nuxt/icon",
     "vue3-carousel-nuxt",
     "nuxt-file-storage",
+    "@ant-design-vue/nuxt",
   ],
 
   devtools: {

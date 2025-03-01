@@ -4,6 +4,8 @@ import { LoginRequestSchema, LoginResponse } from "../../models/login";
 import { compareSync } from "bcrypt-ts";
 import { validateRequest } from "../../utils/validate_request";
 import { createTypedRoute } from "../../utils/typed_route";
+import { Role } from "~/server/models/role";
+
 
 async function loginHandler(event: H3Event): Promise<LoginResponse> {
   const loginAttempt = await validateRequest(event, LoginRequestSchema);

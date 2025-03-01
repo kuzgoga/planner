@@ -10,9 +10,11 @@
     "postinstall": "nuxt prepare"
   },
   "dependencies": {
+    "@ant-design-vue/nuxt": "^1.4.6",
     "@primeuix/themes": "^1.0.0",
     "@scalar/nuxt": "0.2.200",
     "@tailwindcss/vite": "^4.0.9",
+    "ant-design-vue": "^4.2.6",
     "bcrypt-ts": "^6.0.0",
     "formidable": "^3.5.2",
     "nuxt": "^3.15.4",

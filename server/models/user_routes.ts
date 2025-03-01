@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { Role } from "../entities/user.entity";
+import { Role } from "./role";
 
 export const UserSchema = z.object({
   id: z.number().min(1),

@@ -4,6 +4,8 @@ import { Event } from "~/server/entities/event.entity";
 import { In } from "typeorm";
 import { genSaltSync, hashSync } from "bcrypt-ts";
 
+import { Role } from "../models/role";
+
 async function createSampleData(events: H3Event): Promise<void> {
   await addUsers();
   await addEvents();

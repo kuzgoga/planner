@@ -4,6 +4,7 @@ import "dotenv/config";
 import { genSaltSync, hashSync } from "bcrypt-ts";
 import { createTypedRoute } from "../../utils/typed_route";
 import { H3Event, EventHandlerRequest } from "h3";
+import { Role } from "~/server/models/role";
 
 async function signup_handler(event: H3Event): Promise<SignUpResponse> {
   const signupAttempt = await validateRequest(event, SignUpRequestSchema);

@@ -3,6 +3,8 @@ import { User } from "../entities/user.entity";
 import { GetAllUsersResponse } from "../models/user_routes";
 import { H3Event, EventHandlerRequest } from "h3";
 import { createTypedRoute } from "../utils/typed_route";
+import { Role } from "../models/role";
+
 
 async function getAllUsersHandler(
   event: H3Event,
