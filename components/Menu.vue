@@ -1,5 +1,5 @@
 <template>
-  <nav class="w-screen h-screen bg-accent-red fixed z-10">
+  <nav class="w-screen h-screen bg-accent-red fixed z-50">
     <Icon
       :size="30"
       name="material-symbols-light:close-rounded"
@@ -8,9 +8,9 @@
     ></Icon>
     <div class="flex flex-col items-end justify-end h-full p-4">
       <LogoutButton @click="logout" />
-      <NavLink to="/events">мероприятия</NavLink>
-      <NavLink to="/profile">профиль</NavLink>
-      <NavLink to="/">главная</NavLink>
+      <NavLink to="/events" @click="show = false">мероприятия</NavLink>
+      <NavLink to="/profile" @click="show = false">профиль</NavLink>
+      <NavLink to="/" @click="show = false">главная</NavLink>
     </div>
   </nav>
 </template>

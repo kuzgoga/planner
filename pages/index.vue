@@ -8,8 +8,6 @@ definePageMeta({
   middleware: ["authenticated"],
 });
 
-const now = ref(new Date());
-
 const { data: events, error } =
   await useFetch<GetFutureEventsResponse>("/api/events");
 const eventsData = error.value ? {} : (events.value as GetFutureEventsResponse);
@@ -37,6 +35,8 @@ onMounted(() => {
 </script>
 
 <template>
+  <IndexRouter />
+  <NuxtPage />
   <div class="w-full px-6 flex flex-row flex-wrap items-center gap-2">
     <button
       class="px-5 py-2 text-sm font-semibold border border-text-gray rounded-[20px] cursor-pointer bg-text-gray text-white"
