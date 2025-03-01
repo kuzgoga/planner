@@ -45,6 +45,10 @@ DB_PORT="5432"
 DB_USER="planner"
 DB_PASSWORD="superpass"
 MOUNT="absolute/path/to/storage"
+MAIL_HOST="smtp.gmail.com"
+MAIL_USER="me@gmail.com"
+MAIL_PASSWORD="mysuperpass"
+MAIL_PORT="465"
 ```
 
 Execute command below to add example data:
