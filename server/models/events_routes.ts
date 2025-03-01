@@ -28,18 +28,18 @@ export type EventUpdateResponse = EventUpdate;
 export type GetEventByIdResponse = Event;
 
 export type Month =
-  | "январь"
-  | "февраль"
-  | "март"
-  | "апрель"
-  | "май"
-  | "июнь"
-  | "июль"
-  | "август"
-  | "сентябрь"
-  | "октябрь"
-  | "ноябрь"
-  | "декабрь";
+  | "ЯНВ"
+  | "ФЕВ"
+  | "МАР"
+  | "АПР"
+  | "МАЙ"
+  | "ИЮН"
+  | "ИЮЛ"
+  | "АВГ"
+  | "СЕН"
+  | "ОКТ"
+  | "НОЯ"
+  | "ДЕК";
 
 export type GroupedEvents = {
   [M in Month]?: {

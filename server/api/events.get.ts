@@ -28,8 +28,11 @@ async function getFutureEvents(
   const locale = "ru-RU";
   const groupedEvents: GroupedEvents = items.reduce((acc, event) => {
     const date = new Date(event.start);
-    const month = date.toLocaleString(locale, { month: "long" }) as Month;
-    const day = date.getDay();
+    const month = date
+      .toLocaleString(locale, { month: "short" })
+      .substring(0, 3)
+      .toUpperCase() as Month;
+    const day = date.getDate();
 
     if (!acc[month]) {
       acc[month] = {};
