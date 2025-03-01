@@ -12,6 +12,7 @@ export default defineNuxtConfig({
     "vue3-carousel-nuxt",
     "nuxt-file-storage",
   ],
+
   devtools: {
     enabled: true,
   },

@@ -9,12 +9,8 @@ import {
 import { BaseEntity } from "typeorm";
 import { Event } from "./event.entity";
 import { Comment } from "./comment.entity";
+import { Role } from "../models/role";
 
-export enum Role {
-  PARTICIPANT = "PARTICIPANT",
-  ORGANIZER = "ORGANIZER",
-  ADMIN = "ADMIN",
-}
 
 @Entity()
 export class User extends BaseEntity {
