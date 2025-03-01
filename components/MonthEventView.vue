@@ -7,7 +7,7 @@
       <NuxtImg @click="decrement" class="cursor-pointer h-4" src="/svg/arrow-right.svg" />
       <h2 @click="decrement" class="font-semibold cursor-pointer mt-4 mb-4 text-4xl opacity-50 relative left-4">{{ months[(monthNumber + 1) % 12] }}</h2>
     </div>
-    <div class="bg-white rounded-t-4xl py-5 w-screen h-[84vh]">
+    <div class="bg-white rounded-t-4xl py-5 w-screen min-h-[84vh]">
       <template v-for="day in getMaxMonthDays(monthNumber)">
         <MonthEventCard v-if="events[months[monthNumber]]?.[day.toString() as any]" :color-number="<any>(day % 3 + 1)" :day-number="day" :events="<any>events[months[monthNumber]]?.[day.toString() as any]" :month="months[monthNumber]">
         </MonthEventCard>

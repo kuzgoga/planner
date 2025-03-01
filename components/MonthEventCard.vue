@@ -3,7 +3,7 @@
     <p class="opacity-50 font-bold text-xl">{{ getDayOfWeek(dayNumber, month) }}</p>
     <h1 class="text-5xl opacity-50 font-semibold">{{ props.dayNumber }}</h1>
     <h2 class="text-4xl opacity-50 font-semibold">{{ props.month }}</h2>
-    <div class="absolute top-3 right-3 flex flex-col items-end gap-1">
+    <div class="absolute top-3 right-3 flex flex-col truncate max-w-1/3 items-end gap-1">
       <div class="flex items-center h-6 gap-1" v-for="(event, index) in props.events" :key="index">
         <div class="bg-black opacity-50 rounded-full px-3">
           <p :class="[textColor, 'font-bold']">{{ event.title }}</p>
