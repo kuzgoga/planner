@@ -3,6 +3,7 @@ import { createTypedRoute } from "../utils/typed_route";
 import {
   GetFutureEventsResponse,
   GroupedEvents,
+  Month,
 } from "../models/events_routes";
 import { Event } from "../entities/event.entity";
 import { User } from "../entities/user.entity";
@@ -26,11 +27,9 @@ async function getFutureEvents(
 
   const locale = "ru-RU";
   const groupedEvents: GroupedEvents = items.reduce((acc, event) => {
-    const month = new Date(event.start).toLocaleString(locale, {
-      month: "long",
-      year: "numeric",
-    });
-    const day = new Date(event.start).getDay();
+    const date = new Date(event.start);
+    const month = date.toLocaleString(locale, { month: "long" }) as Month;
+    const day = date.getDay();
 
     if (!acc[month]) {
       acc[month] = {};

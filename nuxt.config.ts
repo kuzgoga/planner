@@ -11,7 +11,7 @@ export default defineNuxtConfig({
     "@nuxt/icon",
   ],
   devtools: {
-    enabled: true
+    enabled: true,
   },
   nitro: {
     experimental: {
@@ -46,6 +46,8 @@ export default defineNuxtConfig({
     database: "planner",
     synchronize: true,
     logging: true,
+    migrations: ["./migrations/*.ts"],
+    migrationsRun: true,
   },
 
   compatibilityDate: "2025-02-27",
