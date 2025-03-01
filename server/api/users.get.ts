@@ -18,9 +18,9 @@ async function getAllUsersHandler(
   if (query.keyphrase) {
     users = await User.find({
       where: [
-        { email: ILike(query.keyphrase!!.toString()) },
-        { firstName: ILike(query.keyphrase!!.toString()) },
-        { lastName: ILike(query.keyphrase!!.toString()) },
+        { email: ILike(query.keyphrase!.toString()) },
+        { firstName: ILike(query.keyphrase!.toString()) },
+        { lastName: ILike(query.keyphrase!.toString()) },
       ],
     });
   } else {
