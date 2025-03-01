@@ -93,7 +93,7 @@ const handleRegister = async () => {
       <template #description>Доступно только для отличников</template>
     </PrimaryButton>
     <span class="text-center text-sm font-bold mt-1">
-      Уже есть аккаунт? <NuxtLink to="/auth/login">Войти</NuxtLink>
+      Уже есть аккаунт? <NuxtLink class="text-text-brown underline" to="/auth/login">Войти</NuxtLink>
     </span>
     <span class="text-center text-sm font-bold text-red-500">
       &nbsp;{{ errorText }}&nbsp;
