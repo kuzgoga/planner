@@ -14,8 +14,10 @@
     "@primeuix/themes": "^1.0.0",
     "@scalar/nuxt": "0.2.200",
     "@tailwindcss/vite": "^4.0.9",
+    "@vuepic/vue-datepicker": "^11.0.1",
     "ant-design-vue": "^4.2.6",
     "bcrypt-ts": "^6.0.0",
+    "dayjs": "^1.11.13",
     "formidable": "^3.5.2",
     "mustache": "^4.2.0",
     "nodemailer": "^6.10.0",
@@ -29,6 +31,7 @@
     "ts-ics": "^1.6.7",
     "typeorm": "^0.3.20",
     "vue": "latest",
+    "vue-datepicker": "^1.3.0",
     "vue-router": "latest",
     "vue3-carousel-nuxt": "^1.1.5",
     "zod": "^3.24.2"
