@@ -14,7 +14,7 @@ async function defineEventHandler(
   const event = await validateRequest(serverEvent, EventUpdateSchema);
 
   let participants;
-  if (!event.participants) {
+  if (event.participants) {
     participants = await User.findBy({ id: In(event.participants!) });
   }
 
@@ -29,6 +29,8 @@ async function defineEventHandler(
   });
   await newEvent.save();
 
+  const participantsIds = participants?.map((user) => user.id) ?? [];
+
   return {
     id: newEvent.id,
     title: newEvent.title,
@@ -36,7 +38,7 @@ async function defineEventHandler(
     preview_path: newEvent.preview_path,
     start: newEvent.start.toString(),
     end: newEvent.end.toString(),
-    participants: newEvent.participants.map((user) => user.id),
+    participants: participantsIds,
     location: newEvent.location,
   };
 }

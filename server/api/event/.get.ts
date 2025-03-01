@@ -13,6 +13,7 @@ async function defineEventHandler(
   const eventId = getIdFromEvent(event);
 
   const requestedEvent = await Event.findOne({
+    relations: { participants: false },
     where: { id: Equal(eventId) },
   });
 
