@@ -15,7 +15,10 @@ const { data: events, error } =
 const eventsData = error.value ? {} : (events.value as GetFutureEventsResponse);
 
 const todayEvents = computed(() => {
-  const month = now.value.toLocaleString("ru", { month: "short" });
+  const month = now.value
+    .toLocaleString("ru", { month: "short" })
+    .toUpperCase()
+    .slice(0, 3);
 
   const currentMonthEvents = eventsData[month as keyof GroupedEvents] || {};
   const currentDay = now.value.getDate();
@@ -24,6 +27,8 @@ const todayEvents = computed(() => {
 });
 
 console.log(todayEvents.value);
+
+const eventColors = ["#BBE19E", "#FDE1AB", "#F4B0C0"];
 
 onMounted(() => {
   const timer = setInterval(() => {
@@ -80,32 +85,19 @@ onMounted(() => {
       Мероприятия сегодня
     </span>
     <TodayEventCard
-      :id="1"
-      title="Арт-весна"
-      description="Задача организации, в особенности же начало повседневной работы по формированию позиции требуют от нас анализа форм развития. Таким образом новая модель организационной деятельности позволяет  выполнять важные задания по разработке позиций, занимаемых участниками в отношении поставленных задач."
-      :start-date="new Date('2025-02-28T14:00:00')"
-      :end-date="new Date('2025-02-28T16:00:00')"
-      :likes="932"
-      color="#BBE19E"
+      v-for="(event, index) in todayEvents"
+      :key="event.id"
+      :id="event.id"
+      :title="event.title"
+      :description="event.description"
+      :start-date="new Date(event.start)"
+      :end-date="new Date(event.end)"
+      :likes="event.likes.length"
+      :color="eventColors[index % eventColors.length]"
     />
-    <TodayEventCard
-      :id="2"
-      title="Арт-весна"
-      description="Задача организации, в особенности же начало повседневной работы по формированию позиции требуют от нас анализа форм развития. Таким образом новая модель организационной деятельности позволяет  выполнять важные задания по разработке позиций, занимаемых участниками в отношении поставленных задач."
-      :start-date="new Date('2025-02-28T14:00:00')"
-      :end-date="new Date('2025-02-28T16:00:00')"
-      :likes="932"
-      color="#FDE1AB"
-    />
-    <TodayEventCard
-      :id="3"
-      title="Арт-весна"
-      description="Задача организации, в особенности же начало повседневной работы по формированию позиции требуют от нас анализа форм развития. Таким образом новая модель организационной деятельности позволяет  выполнять важные задания по разработке позиций, занимаемых участниками в отношении поставленных задач."
-      :start-date="new Date('2025-02-28T14:00:00')"
-      :end-date="new Date('2025-02-28T16:00:00')"
-      :likes="932"
-      color="#F4B0C0"
-    />
+    <div v-if="!todayEvents.length" class="text-center py-4 text-text-gray/70">
+      Нет мероприятий на сегодня
+    </div>
   </section>
 </template>
 
