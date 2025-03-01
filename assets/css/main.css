@@ -11,7 +11,8 @@
   --color-border-gray: #898989;
   --color-accent-green: #bbe19e;
   --color-accent-pink: #f4b0c0;
-  --color-accent-dark-pink: #315218
+  --color-accent-dark-pink: #315218;
+  --color-accent-beige: #fdebd6;
 }
 
 @layer components {

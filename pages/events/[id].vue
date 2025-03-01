@@ -16,12 +16,11 @@ if (!eventResponse.data.value) {
 const event = ref(eventResponse.data.value);
 
 const participates = computed(() =>
-  event.value.participants.some((p) => p.id === user?.value?.id),
+  event.value.participants.includes(user.value?.id || 0),
 );
 
 const handleParticipation = async () => {
   if (!user.value) return;
-  console.log(participates.value);
 
   if (participates.value) {
     try {
@@ -29,7 +28,7 @@ const handleParticipation = async () => {
         method: "POST",
       });
       event.value.participants = event.value.participants.filter(
-        (p) => p.id !== user.value?.id,
+        (p) => p !== user.value?.id,
       );
     } catch (error) {
       console.error(error);
@@ -39,7 +38,7 @@ const handleParticipation = async () => {
       await $fetch("/api/event/join/" + id, {
         method: "POST",
       });
-      event.value.participants.push(user.value);
+      event.value.participants.push(user.value.id);
     } catch (error) {
       console.error(error);
     }
@@ -93,7 +92,11 @@ const handleParticipation = async () => {
     </a>
   </div>
   <div
-    class="mt-4 w-full grow flex flex-col gap-2 p-6 bg-white rounded-t-[35px]"
+    class="mt-4 w-full flex flex-col gap-2 p-6 bg-white rounded-t-[35px]"
+    :class="{
+      grow: user?.role !== 'ORGANIZER' || !participates,
+      'pb-[59px]': user?.role === 'ORGANIZER' && participates,
+    }"
   >
     <span class="text-xl font-bold">О мероприятии</span>
     <span class="text-sm font-semibold w-full break-words">{{
@@ -108,5 +111,41 @@ const handleParticipation = async () => {
     <span class="text-sm font-semibold w-full break-words">
       {{ event.location }}
     </span>
+  </div>
+  <div
+    v-if="user?.role === 'ORGANIZER' && participates"
+    class="-mt-[35px] w-full grow flex flex-col gap-4 p-6 rounded-t-[35px] bg-accent-yellow"
+  >
+    <div class="w-full flex flex-row justify-between items-center">
+      <span class="text-xl font-bold">Договоры</span>
+      <IconsPlus class="cursor-pointer" />
+    </div>
+    <div
+      class="w-full p-4 flex flex-row justify-between items-center bg-accent-beige rounded-[25px]"
+    >
+      <div class="flex flex-col gap-1 grow">
+        <span class="text-base font-bold">Сбор персональных данных</span>
+        <span class="text-xs font-semibold">244 KB</span>
+      </div>
+      <IconsCheckMarkCircle class="cursor-pointer" />
+    </div>
+    <div
+      class="w-full p-4 flex flex-row justify-between items-center bg-accent-beige rounded-[25px]"
+    >
+      <div class="flex flex-col gap-1 grow">
+        <span class="text-base font-bold">Работы по установке освещения</span>
+        <span class="text-xs font-semibold">2 MB</span>
+      </div>
+      <IconsCrossCircle class="cursor-pointer" />
+    </div>
+    <div
+      class="w-full p-4 flex flex-row justify-between items-center bg-accent-beige rounded-[25px]"
+    >
+      <div class="flex flex-col gap-1 grow">
+        <span class="text-base font-bold">Питание отличникам</span>
+        <span class="text-xs font-semibold">988 B</span>
+      </div>
+      <IconsClockCircle class="cursor-pointer" />
+    </div>
   </div>
 </template>
