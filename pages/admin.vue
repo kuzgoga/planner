@@ -7,7 +7,7 @@ definePageMeta({
 </script>
 
 <template>
-  <a-flex vertical :gap="15" class="fixed h-screen top-0 left-0 w-3xs">
+  <a-flex vertical :gap="15" class="fixed h-screen top-0 left-0 w-3xs bg-white">
     <h1 class="text-center mt-5 text-3xl font-bold text-blue-600">Админ-панель</h1>
     <a-button to="/admin/events" :size="'large'" @click="navigateTo('/admin/events')">Мероприятия</a-button>
     <a-button danger :size="'large'" @click="() => {
@@ -15,7 +15,7 @@ definePageMeta({
       navigateTo('/start')
     }">Выйти</a-button>
   </a-flex>
-  <div>
+  <div class="h-screen">
     <NuxtPage></NuxtPage>
   </div>
 </template>
