@@ -9,6 +9,7 @@ export default defineNuxtConfig({
     "nuxt-auth-utils",
     "@nuxt/fonts",
     "@nuxt/icon",
+    "nuxt-file-storage",
   ],
   devtools: {
     enabled: true,
@@ -48,6 +49,10 @@ export default defineNuxtConfig({
     logging: true,
     migrations: ["./migrations/*.ts"],
     migrationsRun: true,
+  },
+
+  fileStorage: {
+    mount: process.env.mount,
   },
 
   compatibilityDate: "2025-02-27",

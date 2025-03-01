@@ -48,4 +48,9 @@ export class User extends BaseEntity {
     onDelete: "CASCADE",
   })
   comments: Comment[];
+
+  @OneToMany(() => Contract, (contract) => contract.initiator, {
+    onDelete: "CASCADE",
+  })
+  contracts: Contract[];
 }
