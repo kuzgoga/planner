@@ -16,8 +16,12 @@ if (!eventResponse.data.value) {
 const event = eventResponse.data.value;
 
 const participates = computed(() =>
-  event.participants.includes(user?.value?.id || -1),
+  event.participants.some((p) => p.id === user?.value?.id),
 );
+
+const handleParticipation = async () => {
+  if (!user.value) return;
+};
 </script>
 
 <template>
@@ -43,9 +47,14 @@ const participates = computed(() =>
   </div>
   <div class="mx-4 mt-4 flex flex-row justify-between">
     <button
-      class="w-fit h-fit px-5 py-2 bg-accent-red text-text-gray/85 border border-text-gray/85 rounded-xl text-sm font-bold cursor-pointer"
+      class="w-fit h-fit px-5 py-2 text-text-gray/85 border border-text-gray/85 rounded-xl text-sm font-bold cursor-pointer"
+      :class="{ 'bg-accent-red': !participates }"
     >
-      <span v-if="">Вы участвуете</span>
+      <span v-if="participates">Вы участвуете</span>
+      <span v-else-if="user?.role === 'ORGANIZER'">
+        Участвовать в организации
+      </span>
+      <span v-else>Принять участие</span>
     </button>
     <button
       class="flex justify-center items-center p-2 rounded-xl bg-transparent border border-text-gray cursor-pointer"
