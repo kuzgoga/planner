@@ -1,8 +1,16 @@
 import { H3Event } from "h3";
-import { UserSession } from "../models/user_session";
 
 export async function requireAdminRole(event: H3Event) {
-  const user = await requireUserSession(event);
+  let user;
+  try {
+    user = await requireUserSession(event);
+  } catch (_) {
+    throw createError({
+      statusCode: 401,
+      statusMessage: "Unauthorized",
+      message: "Пожалуйста, войдите в систему.",
+    });
+  }
 
   if (user.role !== "ADMIN") {
     throw createError({
@@ -11,6 +19,4 @@ export async function requireAdminRole(event: H3Event) {
       message: "Вам не разрешено выполнить это действие.",
     });
   }
-
-  return user;
 }

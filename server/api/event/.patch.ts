@@ -1,7 +1,4 @@
-import {
-  EventCreateSchema,
-  EventUpdateResponse,
-} from "../../models/events_routes";
+import { EventSchema, EventUpdateResponse } from "../../models/events_routes";
 import { Event } from "../../entities/event.entity";
 import { EventUpdateSchema } from "../../models/events_routes";
 import { requireOrganizerRole } from "../../utils/require_organizer_role";
