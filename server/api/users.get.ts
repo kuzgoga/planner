@@ -5,7 +5,6 @@ import { H3Event, EventHandlerRequest } from "h3";
 import { createTypedRoute } from "../utils/typed_route";
 import { Role } from "../models/role";
 
-
 async function getAllUsersHandler(
   event: H3Event,
 ): Promise<GetAllUsersResponse> {
@@ -16,7 +15,7 @@ async function getAllUsersHandler(
   const query = getQuery(event);
 
   let users;
-  if (!query.keyphrase) {
+  if (query.keyphrase) {
     users = await User.find({
       where: [
         { email: ILike(query.keyphrase!!.toString()) },
