@@ -1,33 +1,42 @@
 <script setup lang="ts">
-import { months, type GetFutureEventsResponse } from '~/server/models/events_routes'
+import {
+  months,
+  type GetFutureEventsResponse,
+} from "~/server/models/events_routes";
 
-const headers = useRequestHeaders(['cookie'])
+definePageMeta({
+  middleware: ["authenticated"],
+});
 
-const events = useState<any>(() => [])
+const headers = useRequestHeaders(["cookie"]);
+
+const events = useState<any>(() => []);
 
 useFetch<GetFutureEventsResponse>("/api/events", {
-    headers,
+  headers,
 }).then(({ data }) => {
-    for (const month of months) {
-        if (!data.value![month as any]) events.value[month] = [];
-        else events.value[month] = data.value![month as any]
-    }
-})
+  for (const month of months) {
+    if (!data.value![month as any]) events.value[month] = [];
+    else events.value[month] = data.value![month as any];
+  }
+});
 
-const slide = ref(new Date().getMonth())
-
+const slide = ref(new Date().getMonth());
 </script>
 
 <template>
-    <ClientOnly>
-        <Carousel :carouselConfig="{itemsToShow: 1}" v-model="slide">
-            <Slide v-for="i in 12" >
-                <MonthEventView v-model="slide" :monthNumber="i-1" :events class="h-full"></MonthEventView>
-            </Slide>
-        </Carousel>
-    </ClientOnly>
+  <ClientOnly>
+    <Carousel :carouselConfig="{ itemsToShow: 1 }" v-model="slide">
+      <Slide v-for="i in 12">
+        <MonthEventView
+          v-model="slide"
+          :monthNumber="i - 1"
+          :events
+          class="h-full"
+        ></MonthEventView>
+      </Slide>
+    </Carousel>
+  </ClientOnly>
 </template>
 
-<style>
-
-</style>
+<style></style>
