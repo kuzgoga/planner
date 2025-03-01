@@ -47,6 +47,12 @@ DB_PASSWORD="superpass"
 MOUNT="absolute/path/to/storage"
 ```
 
+Execute command below to add example data:
+
+```bash
+curl -X POST http://localhost:3000/api/sample
+```
+
 **Scalar** is located at [http://localhost:3000/docs](http://localhost:3000/docs)
 
 ## Production

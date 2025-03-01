@@ -177,7 +177,7 @@ async function addEvents() {
     // Event 9 - 6 hour duration, starts today evening
     const todayEvening = new Date(new Date().setHours(16, 0, 0, 0));
     await Event.create({
-      title: "Ёлкин код: Кузбасский хакатон по программированию",
+      title: "Ёлкин код",
       description: "Соревнование для разработчиков по созданию проектов",
       start: new Date(2025, 1, 28),
       end: new Date(2025, 2, 2),
@@ -192,8 +192,10 @@ async function addEvents() {
     const twoWeeksLater = new Date(
       new Date().setHours(9, 0, 0, 0) + 14 * 24 * 60 * 60 * 1000,
     );
+
+    // Event 11 - 1 hour duration, starts today
     await Event.create({
-      title: "Конференция разработчиков",
+      title: "Конф. разработчиков",
       description: "Ежегодная конференция для разработчиков и IT-специалистов",
       start: twoWeeksLater,
       end: new Date(twoWeeksLater.getTime() + 1000 * 60 * 60 * 8),
@@ -203,7 +205,140 @@ async function addEvents() {
       likes: [2, 3],
       participants: await User.findBy({ id: In([1, 2, 3]) }),
     }).save();
+
+    // Event 11 - 1 hour duration, starts today
+    const today = new Date();
+    await Event.create({
+      title: "Бизнес-ланч",
+      description: "Встреча для обсуждения бизнес-идей и возможностей.",
+      start: today,
+      end: new Date(today.getTime() + 1000 * 60 * 60),
+      location: "г. Кемерово, ул. Ленина 10",
+      preview_path: "https://images.unsplash.com/photo-1556740749-887f6717d7e4",
+      likes: [1, 2],
+      participants: await User.findBy({ id: In([1, 2]) }),
+    }).save();
+
+    // Event 12 - 2 hour duration, starts tomorrow
+    const tomorrow = new Date(
+      new Date().setHours(14, 0, 0, 0) + 24 * 60 * 60 * 1000,
+    );
+    await Event.create({
+      title: "Круглый стол",
+      description: "Обсуждение текущих тенденций в IT-индустрии.",
+      start: tomorrow,
+      end: new Date(tomorrow.getTime() + 1000 * 60 * 60 * 2),
+      location: "г. Кемерово, ул. Советская 20",
+      preview_path:
+        "https://images.unsplash.com/photo-1522202176988-66273c2fd55f",
+      likes: [3],
+      participants: await User.findBy({ id: In([3]) }),
+    }).save();
   }
+
+  // Event 11 - 1 hour duration, starts today
+  const today = new Date();
+  await Event.create({
+    title: "Бизнес-ланч",
+    description: "Встреча для обсуждения бизнес-идей и возможностей.",
+    start: today,
+    end: new Date(today.getTime() + 1000 * 60 * 60),
+    location: "г. Кемерово, ул. Ленина 10",
+    preview_path: "https://images.unsplash.com/photo-1556740749-887f6717d7e4",
+    likes: [1, 2],
+    participants: await User.findBy({ id: In([1, 2]) }),
+  }).save();
+
+  // Event 12 - 2 hour duration, starts tomorrow
+  const tomorrow = new Date(
+    new Date().setHours(14, 0, 0, 0) + 24 * 60 * 60 * 1000,
+  );
+  await Event.create({
+    title: "Круглый стол",
+    description: "Обсуждение текущих тенденций в IT-индустрии.",
+    start: tomorrow,
+    end: new Date(tomorrow.getTime() + 1000 * 60 * 60 * 2),
+    location: "г. Кемерово, ул. Советская 20",
+    preview_path:
+      "https://images.unsplash.com/photo-1522202176988-66273c2fd55f",
+    likes: [3],
+    participants: await User.findBy({ id: In([3]) }),
+  }).save();
+
+  // Event 13 - 2 hour duration, starts today
+  const todayEvening = new Date(new Date().setHours(18, 0, 0, 0));
+  await Event.create({
+    title: "Кино вечер",
+    description: "Просмотр и обсуждение классических фильмов.",
+    start: todayEvening,
+    end: new Date(todayEvening.getTime() + 1000 * 60 * 60 * 2),
+    location: "г. Кемерово, ул. Пушкина 15",
+    preview_path:
+      "https://images.unsplash.com/photo-1511765224389-37f0e77cf0eb",
+    likes: [2, 3],
+    participants: await User.findBy({ id: In([1, 3]) }),
+  }).save();
+
+  // Event 14 - 3 hour duration, starts a month ago
+  const oneMonthAgo = new Date(new Date().setMonth(new Date().getMonth() - 1));
+  await Event.create({
+    title: "Прошлый семинар",
+    description: "Семинар по новым технологиям, прошедший месяц назад.",
+    start: oneMonthAgo,
+    end: new Date(oneMonthAgo.getTime() + 1000 * 60 * 60 * 3),
+    location: "г. Кемерово, ул. Ленина 20",
+    preview_path:
+      "https://images.unsplash.com/photo-1504384308090-c894fdcc538d",
+    likes: [1, 2],
+    participants: await User.findBy({ id: In([1, 2]) }),
+  }).save();
+
+  // Event 15 - 2 day duration, starts a month ago
+  const twoDaysOneMonthAgo = new Date(
+    new Date().setMonth(new Date().getMonth() - 1),
+  );
+  await Event.create({
+    title: "Прошлая выставка",
+    description: "Выставка новейших технологий, прошедшая месяц назад.",
+    start: twoDaysOneMonthAgo,
+    end: new Date(twoDaysOneMonthAgo.getTime() + 1000 * 60 * 60 * 48),
+    location: "г. Кемерово, ул. Тухачевского 58",
+    preview_path:
+      "https://images.unsplash.com/photo-1519389950473-47ba0277781c",
+    likes: [2, 3],
+    participants: await User.findBy({ id: In([1, 2, 3]) }),
+  }).save();
+
+  // Event 16 - 4 hour duration, starts a month from now
+  const oneMonthLater = new Date(
+    new Date().setMonth(new Date().getMonth() + 1),
+  );
+  await Event.create({
+    title: "Будущий тренинг",
+    description: "Тренинг по развитию навыков, который пройдет через месяц.",
+    start: oneMonthLater,
+    end: new Date(oneMonthLater.getTime() + 1000 * 60 * 60 * 4),
+    location: "г. Кемерово, ул. Весенняя 15",
+    preview_path: "https://images.unsplash.com/photo-1552664730-d307ca884978",
+    likes: [1, 2],
+    participants: await User.findBy({ id: In([2, 3]) }),
+  }).save();
+
+  // Event 17 - 1 day duration, starts a month from now
+  const oneDayOneMonthLater = new Date(
+    new Date().setMonth(new Date().getMonth() + 1),
+  );
+  await Event.create({
+    title: "Будущая конференция",
+    description: "Конференция по IT-технологиям, которая пройдет через месяц.",
+    start: oneDayOneMonthLater,
+    end: new Date(oneDayOneMonthLater.getTime() + 1000 * 60 * 60 * 24),
+    location: "г. Кемерово, ул. Ленина 30",
+    preview_path:
+      "https://images.unsplash.com/photo-1515187029135-18ee286d815b",
+    likes: [2, 3],
+    participants: await User.findBy({ id: In([1, 2, 3]) }),
+  }).save();
 }
 
 export default createTypedRoute(createSampleData);
