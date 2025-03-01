@@ -1,17 +1,20 @@
 <script setup lang="ts">
-import type { GetFutureEventsResponse } from '~/server/models/events_routes'
+import { months, type GetFutureEventsResponse } from '~/server/models/events_routes'
 
 const headers = useRequestHeaders(['cookie'])
 
-const response = useState<GetFutureEventsResponse | null>(() => null)
+const events = useState<any>(() => [])
 
 useFetch<GetFutureEventsResponse>("/api/events", {
     headers,
 }).then(({ data }) => {
-    response.value = data.value
+    for (const month of months) {
+        if (!data.value![month as any]) events.value[month] = [];
+        else events.value[month] = data.value![month as any]
+    }
 })
 
-const slide = ref(0)
+const slide = ref(new Date().getMonth())
 
 </script>
 
@@ -19,7 +22,7 @@ const slide = ref(0)
     <ClientOnly>
         <Carousel :carouselConfig="{itemsToShow: 1}" v-model="slide">
             <Slide v-for="i in 12">
-                <MonthEventView v-model="slide"></MonthEventView>
+                <MonthEventView v-model="slide" :monthNumber="i-1" :events></MonthEventView>
             </Slide>
         </Carousel>
     </ClientOnly>

@@ -1,45 +1,76 @@
 <template>
-  <div v-if="props.events.length" :class="['bg' + color, 'flex flex-col justify-center p-3 h-36 rounded-2xl relative z-10']">
-    <p class="opacity-50 font-bold text-xl">Суббота</p>
+  <div :class="[color, 'flex flex-col justify-center p-3 m-3 mx-5 h-36 rounded-2xl relative z-10']">
+    <p class="opacity-50 font-bold text-xl">{{ getDayOfWeek(dayNumber, month) }}</p>
     <h1 class="text-5xl opacity-50 font-semibold">{{ props.dayNumber }}</h1>
     <h2 class="text-4xl opacity-50 font-semibold">{{ props.month }}</h2>
     <div class="absolute top-3 right-3 flex flex-col items-end gap-1">
       <div class="flex items-center h-6 gap-1" v-for="(event, index) in props.events" :key="index">
         <div class="bg-black opacity-50 rounded-full px-3">
-          <p :class="['text' + color, 'font-bold']">{{ event.name }}</p>
+          <p :class="[textColor, 'font-bold']">{{ event.title }}</p>
         </div>
-        <p class="opacity-50 font-bold">{{ event.time }}</p>
+        <p class="opacity-50 font-bold">{{ formatTime(event.start) }}</p>
       </div>
     </div>
   </div>
-  <div v-else>
-    <div class="w-full flex items-center relative">
-      <hr class="bg-black h-0.5 w-full" />
-      <p class="absolute right-0 px-5 bg-white">{{ props.dayNumber }} {{ props.month.toLowerCase() }}</p>
-    </div>
-  </div>
+
 </template>
 
 <script lang="ts" setup>
+import { months } from '~/server/models/events_routes'
+
+export interface IEvent {
+  title: string,
+  start: string
+}
+
 export interface IMonthEventCard {
   dayNumber: number,
   colorNumber: 1 | 2 | 3,
-  events: {
-    name: string,
-    time: string
-  }[]
+  events: IEvent[]
 }
 
 const color = computed(() => {
   switch (props.colorNumber) {
     case 1:
-      return '-accent-pink'
+      return 'bg-accent-pink'
     case 2:
-      return '-accent-yellow'
+      return 'bg-accent-yellow'
     case 3:
-      return '-accent-green'
+      return 'bg-accent-green'
   }
 })
+
+const getDayOfWeek = (day: number, month: any): string => {
+  const date = new Date(new Date().getFullYear(), months.indexOf(month), day);
+  const days = ['Воскресенье', 'Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота'];
+  return days[date.getDay()];
+};
+
+const textColor = computed(() => {
+  switch (props.colorNumber) {
+    case 1:
+      return 'text-accent-pink'
+    case 2:
+      return 'text-accent-yellow'
+    case 3:
+      return 'text-accent-green'
+  }
+})
+
+function formatTime(dateString: string): string {
+  return new Date(dateString).toLocaleTimeString('ru-RU', {
+    hour: '2-digit',
+    minute: '2-digit'
+  })
+}
+
+function getWeekDay(
+  date: Date,
+  locale: string | string[] = 'ru-RU',
+  weekdayFormat: 'long' | 'short' | 'narrow' = 'long'
+): string {
+  return date.toLocaleDateString(locale, { weekday: weekdayFormat });
+}
 
 const props = defineProps<IMonthEventCard & { month: string, }>()
 </script>

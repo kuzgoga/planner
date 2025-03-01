@@ -27,19 +27,20 @@ export type EventUpdateResponse = EventUpdate;
 
 export type GetEventByIdResponse = Event;
 
-export type Month =
-  | "ЯНВ"
-  | "ФЕВ"
-  | "МАР"
-  | "АПР"
-  | "МАЙ"
-  | "ИЮН"
-  | "ИЮЛ"
-  | "АВГ"
-  | "СЕН"
-  | "ОКТ"
-  | "НОЯ"
-  | "ДЕК";
+export const months = ["ЯНВ"
+  , "ФЕВ"
+  , "МАР"
+  , "АПР"
+  , "МАЙ"
+  , "ИЮН"
+  , "ИЮЛ"
+  , "АВГ"
+  , "СЕН"
+  , "ОКТ"
+  , "НОЯ"
+  , "ДЕК"] as const
+
+export type Month = keyof typeof months[number]
 
 export type GroupedEvents = {
   [M in Month]?: {
