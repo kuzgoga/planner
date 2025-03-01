@@ -2,11 +2,12 @@
 import VueDatePicker from '@vuepic/vue-datepicker'
 import '@vuepic/vue-datepicker/dist/main.css'
 import { App } from 'ant-design-vue'
+import type { Event } from '~/server/entities/event.entity'
 
-const events = ref<any[]>([])
+
+const events = ref<Event[]>([])
 const load = async () => {
-  await useFetch("/api/event").then(({ data: { value } }) => console.log(value))
-  console.log(events.value)
+  await useFetch("/api/event/all").then(({ data: { value } }) => events.value = value as any[])
 }
 
 const show = ref(false)
@@ -41,6 +42,7 @@ const create = async () => {
     body: JSON.stringify(data.value)
   })
   show.value = false
+  load()
 }
 load()
 </script>
@@ -59,5 +61,16 @@ load()
         <a-button type="primary" @click="create">Создать</a-button>
       </a-flex>
     </a-form>
+  </a-flex>
+  <a-flex :justify="'end'" :align="'start'" class="w-full h-full">
+    <div class="h-screen w-full">
+    <a-table :size="'large'" :pagination="{ pageSize: 50 }" :columns="[
+      { title: 'Название', dataIndex: 'title', key: 'title' },
+      { title: 'Описание', dataIndex: 'description', key: 'description' },
+      { title: 'Адрес', dataIndex: 'location', key: 'location' },
+      { title: 'Дата начала', dataIndex: 'start', key: 'start' },
+      { title: 'Дата кончала', dataIndex: 'end', key: 'end' },
+    ]" :dataSource="events" />
+  </div>
   </a-flex>
 </template>
