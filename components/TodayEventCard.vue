@@ -9,12 +9,6 @@ defineProps<{
   color: string;
 }>();
 
-/**
- * Formats the duration between two dates in Russian language format.
- * @param {Date} start - The start date and time
- * @param {Date} end - The end date and time
- * @returns {string} Formatted duration string in hours and minutes
- */
 const formatDuration = (start: Date, end: Date): string => {
   const durationInMinutes = Math.floor(
     (end.getTime() - start.getTime()) / (1000 * 60),
@@ -54,7 +48,7 @@ const formatDuration = (start: Date, end: Date): string => {
         <span class="text-sm font-bold text-text-gray/65">{{ likes }}</span>
         <Icon
           name="material-symbols:favorite-outline"
-          class="text-text-gray/65 w-[22px] h-[22px]"
+          class="text-text-gray/65 w-[22px] h-[22px] static"
         />
       </div>
     </div>
