@@ -26,6 +26,7 @@ export type EventUpdate = z.infer<typeof EventUpdateSchema>;
 export type EventUpdateResponse = EventUpdate;
 
 export type GetEventByIdResponse = z.infer<typeof EventSchema>;
+export type GetAllManagedEventsResponse = z.infer<typeof EventSchema>[];
 
 export const months = [
   "ЯНВ",
