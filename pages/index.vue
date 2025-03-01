@@ -26,8 +26,6 @@ const todayEvents = computed(() => {
   return currentMonthEvents[currentDay] || [];
 });
 
-console.log(todayEvents.value);
-
 const eventColors = ["#BBE19E", "#FDE1AB", "#F4B0C0"];
 
 onMounted(() => {
