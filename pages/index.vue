@@ -1,9 +1,29 @@
 <script setup lang="ts">
+import type {
+  GetFutureEventsResponse,
+  GroupedEvents,
+} from "~/server/models/events_routes";
+
 definePageMeta({
   middleware: ["authenticated"],
 });
 
 const now = ref(new Date());
+
+const { data: events, error } =
+  await useFetch<GetFutureEventsResponse>("/api/events");
+const eventsData = error.value ? {} : (events.value as GetFutureEventsResponse);
+
+const todayEvents = computed(() => {
+  const month = now.value.toLocaleString("ru", { month: "short" });
+
+  const currentMonthEvents = eventsData[month as keyof GroupedEvents] || {};
+  const currentDay = now.value.getDate();
+
+  return currentMonthEvents[currentDay] || [];
+});
+
+console.log(todayEvents.value);
 
 onMounted(() => {
   const timer = setInterval(() => {
