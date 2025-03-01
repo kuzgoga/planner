@@ -9,12 +9,19 @@ import { createTypedRoute } from "../../utils/typed_route";
 async function defineEventHandler(
   event: H3Event,
 ): Promise<GetEventByIdResponse> {
-  requireOrganizerRole(event);
-  const eventId = getIdFromEvent(event);
+  const _ = requireUserSession(event);
+  const eventId = getRouterParam(event, "id");
+
+  if (!eventId) {
+    throw createError({
+      statusCode: 400,
+      statusMessage: "Неверный идентификатор события",
+    });
+  }
 
   const requestedEvent = await Event.findOne({
     relations: { participants: false },
-    where: { id: Equal(eventId) },
+    where: { id: Equal(parseInt(eventId)) },
   });
 
   if (!requestedEvent) {

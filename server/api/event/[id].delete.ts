@@ -5,9 +5,12 @@ import { createTypedRoute } from "../../utils/typed_route";
 import { DeleteEventResponse } from "~/server/models/events_routes";
 
 async function deleteEvent(event: H3Event): Promise<DeleteEventResponse> {
-  const targetId = getRequiredQueryParam(event, "id", castToNumber);
+  const targetId = getRouterParam(event, "id");
+  if (!targetId) {
+    throw createError({ statusCode: 400, statusMessage: "Invalid event ID" });
+  }
   const item = await Event.findOneBy({
-    id: targetId,
+    id: parseInt(targetId),
   });
 
   if (!item) {
