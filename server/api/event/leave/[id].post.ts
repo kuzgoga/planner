@@ -2,7 +2,7 @@ import { H3Event } from "h3";
 
 import { Event } from "../../../entities/event.entity";
 
-async function joinEvent(event: H3Event): Promise<void> {
+async function leaveEvent(event: H3Event): Promise<void> {
   const session = await requireUserSession(event);
   const eventId = getRouterParam(event, "id");
 
@@ -34,4 +34,4 @@ async function joinEvent(event: H3Event): Promise<void> {
   await currentEvent.save();
 }
 
-export default createTypedRoute(joinEvent);
+export default createTypedRoute(leaveEvent);

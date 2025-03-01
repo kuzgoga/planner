@@ -4,6 +4,7 @@ import { Event } from "../../../entities/event.entity";
 
 async function joinEvent(event: H3Event): Promise<void> {
   const session = await requireUserSession(event);
+  console.log(session.user.id);
   const eventId = getRouterParam(event, "id");
 
   if (!eventId) {
@@ -11,7 +12,10 @@ async function joinEvent(event: H3Event): Promise<void> {
     return;
   }
 
-  const currentEvent = await Event.findOneBy({ id: parseInt(eventId) });
+  const currentEvent = await Event.findOne({
+    where: { id: parseInt(eventId) },
+    relations: { participants: true },
+  });
 
   if (!currentEvent) {
     createError({ statusCode: 404, statusMessage: "Event not found" });
