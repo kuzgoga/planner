@@ -10,16 +10,19 @@
     </p>
     <h1 class="text-5xl opacity-50 font-semibold">{{ props.dayNumber }}</h1>
     <h2 class="text-4xl opacity-50 font-semibold">{{ props.month }}</h2>
-    <div
-      class="absolute top-3 right-3 flex flex-col truncate max-w-3/4 items-end gap-1"
-    >
+    <div class="absolute top-3 right-3 flex flex-col items-end gap-1">
       <div
         class="flex items-center h-6 gap-1"
         v-for="(event, index) in props.events"
         :key="index"
       >
-        <div class="bg-black opacity-50 rounded-full px-3">
-          <p :class="[textColor, 'font-bold']">{{ event.title }}</p>
+        <div
+          class="bg-black opacity-50 rounded-full px-3 cursor-pointer max-w-48"
+          @click="navigateTo('/events/' + event.id)"
+        >
+          <p class="truncate" :class="[textColor, 'font-bold']">
+            {{ event.title }}
+          </p>
         </div>
         <p class="opacity-50 font-bold">{{ formatTime(event.start) }}</p>
       </div>
@@ -31,6 +34,7 @@
 import { months } from "~/server/models/events_routes";
 
 export interface IEvent {
+  id: number;
   title: string;
   start: string;
 }
