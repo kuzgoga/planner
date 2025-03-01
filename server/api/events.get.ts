@@ -13,7 +13,7 @@ async function getFutureEvents(
   const session = await requireUserSession(events);
 
   const items = await Event.find({
-    relations: { participants: true },
+    relations: { participants: false },
     where: {
       participants: {
         id: session.user.id,

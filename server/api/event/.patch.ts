@@ -10,7 +10,7 @@ import { createTypedRoute } from "../../utils/typed_route";
 async function defineEventHandler(
   serverEvent: H3Event,
 ): Promise<EventUpdateResponse> {
-  requireOrganizerRole(serverEvent);
+  //requireOrganizerRole(serverEvent);
   const event = await validateRequest(serverEvent, EventUpdateSchema);
 
   let participants;
@@ -29,7 +29,16 @@ async function defineEventHandler(
   });
   await newEvent.save();
 
-  return newEvent;
+  return {
+    id: newEvent.id,
+    title: newEvent.title,
+    description: newEvent.description,
+    preview_path: newEvent.preview_path,
+    start: newEvent.start.toString(),
+    end: newEvent.end.toString(),
+    participants: newEvent.participants.map((user) => user.id),
+    location: newEvent.location,
+  };
 }
 
 export default createTypedRoute(defineEventHandler);
