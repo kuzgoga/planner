@@ -1,4 +1,5 @@
 export default function getMaxMonthDays(month: number): number {
+  month++;
   if (month === 2) {
     return 28;
   }

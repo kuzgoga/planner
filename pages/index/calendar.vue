@@ -21,9 +21,13 @@ const slide = ref(new Date().getMonth())
 <template>
     <ClientOnly>
         <Carousel :carouselConfig="{itemsToShow: 1}" v-model="slide">
-            <Slide v-for="i in 12">
-                <MonthEventView v-model="slide" :monthNumber="i-1" :events></MonthEventView>
+            <Slide v-for="i in 12" >
+                <MonthEventView v-model="slide" :monthNumber="i-1" :events class="h-full"></MonthEventView>
             </Slide>
         </Carousel>
     </ClientOnly>
 </template>
+
+<style>
+
+</style>
