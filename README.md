@@ -44,6 +44,7 @@ DB_HOST="127.0.0.1"
 DB_PORT="5432"
 DB_USER="planner"
 DB_PASSWORD="superpass"
+MOUNT="absolute/path/to/storage"
 ```
 
 **Scalar** is located at [http://localhost:3000/docs](http://localhost:3000/docs)

@@ -3,6 +3,7 @@ import {
   Entity,
   JoinTable,
   ManyToMany,
+  OneToMany,
   PrimaryGeneratedColumn,
 } from "typeorm";
 import { BaseEntity } from "typeorm";
@@ -37,4 +38,7 @@ export class Event extends BaseEntity {
   @ManyToMany(() => User, (user) => user.events, { onDelete: "CASCADE" })
   @JoinTable()
   participants: User[];
+
+  @OneToMany(() => Contract, (contract) => contract.event)
+  contracts: Contract[];
 }

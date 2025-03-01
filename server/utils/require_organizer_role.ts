@@ -11,7 +11,7 @@ export async function requireOrganizerRole(event: H3Event) {
       message: "Пожалуйста, войдите в систему.",
     });
   }
-  if (user.role !== "ORGANIZER") {
+  if (user.role !== "ORGANIZER" && user.role !== "ADMIN") {
     throw createError({
       statusCode: 403,
       statusMessage: "Forbidden",

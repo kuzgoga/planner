@@ -15,7 +15,7 @@ import { ref } from "vue";
 async function defineEventHandler(
   serverEvent: H3Event,
 ): Promise<EventCreateResponse> {
-  //requireOrganizerRole(serverEvent);
+  requireOrganizerRole(serverEvent);
   const event = await validateRequest(serverEvent, EventCreateRequestSchema);
 
   const participants = await User.findBy({ id: In(event.participants) });

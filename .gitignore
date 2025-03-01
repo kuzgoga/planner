@@ -23,5 +23,6 @@ logs
 .env.*
 !.env.example
 db.sqlite
+storage/
 
 package-lock.json

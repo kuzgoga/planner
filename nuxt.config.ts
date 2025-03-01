@@ -53,7 +53,7 @@ export default defineNuxtConfig({
   },
 
   fileStorage: {
-    mount: process.env.mount,
+    mount: process.env.MOUNT,
   },
 
   compatibilityDate: "2025-02-27",

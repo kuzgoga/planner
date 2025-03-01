@@ -10,7 +10,7 @@ import { createTypedRoute } from "../../utils/typed_route";
 async function defineEventHandler(
   serverEvent: H3Event,
 ): Promise<EventUpdateResponse> {
-  //requireOrganizerRole(serverEvent);
+  requireOrganizerRole(serverEvent);
   const event = await validateRequest(serverEvent, EventUpdateSchema);
 
   let participants;
