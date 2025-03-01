@@ -3,30 +3,24 @@ import type { GetFutureEventsResponse } from '~/server/models/events_routes'
 
 const headers = useRequestHeaders(['cookie'])
 
-const events = useState<GetFutureEventsResponse | null>(() => null)
+const response = useState<GetFutureEventsResponse | null>(() => null)
 
 useFetch<GetFutureEventsResponse>("/api/events", {
     headers,
 }).then(({ data }) => {
-    events.value = data.value
+    response.value = data.value
 })
 
-const keys = computed(() => {
-    if (events.value === null) {
-        return []
-    }
-    return Object.keys(events.value).map(el => el.slice(0, el.length - 8)) as (keyof GetFutureEventsResponse)[]
-})
-
+const slide = ref(0)
 
 </script>
 
 <template>
-    <div>
-        <Carousel>
-            <Slide v-for="key in keys" :key>
-                {{ key }}
+    <ClientOnly>
+        <Carousel :carouselConfig="{itemsToShow: 1}" v-model="slide">
+            <Slide v-for="i in 12">
+                <MonthEventView v-model="slide"></MonthEventView>
             </Slide>
         </Carousel>
-    </div>
+    </ClientOnly>
 </template>
