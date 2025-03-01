@@ -9,7 +9,7 @@
     </div>
     <div class="bg-white rounded-t-4xl py-5 w-screen h-[84vh]">
       <template v-for="day in getMaxMonthDays(monthNumber)">
-        <MonthEventCard v-if="events[months[monthNumber]]?.[day.toString() as any]" :color-number="<any>(day % 3 + 1)" :day-number="1" :events="<any>events[months[monthNumber]]?.[day.toString() as any]" :month="months[monthNumber]">
+        <MonthEventCard v-if="events[months[monthNumber]]?.[day.toString() as any]" :color-number="<any>(day % 3 + 1)" :day-number="day" :events="<any>events[months[monthNumber]]?.[day.toString() as any]" :month="months[monthNumber]">
         </MonthEventCard>
           <div v-else class="w-full flex items-center relative mt-5 opacity-80">
             <hr class="bg-black h-0.5 w-full mx-5 opacity-80" />
