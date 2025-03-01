@@ -25,22 +25,24 @@ export const EventUpdateSchema = EventSchema.partial();
 export type EventUpdate = z.infer<typeof EventUpdateSchema>;
 export type EventUpdateResponse = EventUpdate;
 
-export type GetEventByIdResponse = Event;
+export type GetEventByIdResponse = z.infer<typeof EventSchema>;
 
-export const months = ["ЯНВ"
-  , "ФЕВ"
-  , "МАР"
-  , "АПР"
-  , "МАЙ"
-  , "ИЮН"
-  , "ИЮЛ"
-  , "АВГ"
-  , "СЕН"
-  , "ОКТ"
-  , "НОЯ"
-  , "ДЕК"] as const
+export const months = [
+  "ЯНВ",
+  "ФЕВ",
+  "МАР",
+  "АПР",
+  "МАЙ",
+  "ИЮН",
+  "ИЮЛ",
+  "АВГ",
+  "СЕН",
+  "ОКТ",
+  "НОЯ",
+  "ДЕК",
+] as const;
 
-export type Month = keyof typeof months[number]
+export type Month = keyof (typeof months)[number];
 
 export type GroupedEvents = {
   [M in Month]?: {

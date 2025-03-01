@@ -30,7 +30,19 @@ async function defineEventHandler(
       statusMessage: "Событие не найдено",
     });
   }
-  return requestedEvent;
+  return {
+    id: requestedEvent.id,
+    title: requestedEvent.title,
+    description: requestedEvent.description,
+    start: requestedEvent.start.toString(),
+    end: requestedEvent.end.toString(),
+    location: requestedEvent.location,
+    preview_path: requestedEvent.preview_path,
+    likes: requestedEvent.likes,
+    participants: requestedEvent.participants.map(
+      (participant) => participant.id,
+    ),
+  };
 }
 
 export default createTypedRoute(defineEventHandler);
