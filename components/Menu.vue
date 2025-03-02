@@ -18,7 +18,7 @@
 <script lang="ts" setup>
 import { navigateTo } from "#app";
 
-const show = defineModel<boolean>();
+const show = defineModel<boolean>({ default: false });
 
 const { clear } = useUserSession();
 

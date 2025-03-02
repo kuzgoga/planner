@@ -3,13 +3,13 @@
     <Menu
       class="transition-[top]"
       :class="{
-        '-top-full': !show,
+        '-top-[105%]': !show,
         'top-0': show,
       }"
       v-model="show"
     ></Menu>
     <div class="pt-5 p-6">
-      <VHeader v-model="show" />
+      <VHeader v-model="<boolean>show" />
     </div>
     <slot></slot>
   </div>
