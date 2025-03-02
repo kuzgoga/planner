@@ -21,7 +21,7 @@ const eventColors = ["#BBE19E", "#FDE1AB", "#F4B0C0"];
     class="grow w-full mt-4 bg-white rounded-t-[35px] p-6 flex flex-col gap-2"
   >
     <span class="text-text-gray text-xl font-bold mb-2">
-      Мероприятия сегодня
+      Доступные мероприятия
     </span>
     <AvailableEventCard
       v-for="(event, index) in eventsData"
