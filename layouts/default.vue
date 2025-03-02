@@ -16,5 +16,7 @@
 </template>
 
 <script lang="ts" setup>
-const show = ref(false);
+import { ref } from 'vue';
+
+const show = ref<boolean>(false);
 </script>
