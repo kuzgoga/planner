@@ -1,13 +1,20 @@
 <script setup lang="ts">
 import VueDatePicker from '@vuepic/vue-datepicker'
 import '@vuepic/vue-datepicker/dist/main.css'
-import { App } from 'ant-design-vue'
+import { App, Divider } from 'ant-design-vue'
 import type { Event } from '~/server/entities/event.entity'
 
 
 const events = ref<Event[]>([])
 const load = async () => {
   await useFetch("/api/event/all").then(({ data: { value } }) => events.value = value as any[])
+}
+
+const remove = async (id: number) => {
+  await $fetch(`/api/event/${id}`, {
+    method: 'DELETE'
+  })
+  load()
 }
 
 const show = ref(false)
@@ -65,12 +72,19 @@ load()
   <a-flex :justify="'end'" :align="'start'" class="w-full h-full">
     <div class="h-screen w-full">
     <a-table :size="'large'" :pagination="{ pageSize: 50 }" :columns="[
+      { title: 'id', dataIndex: 'id', key: 'id' },
       { title: 'Название', dataIndex: 'title', key: 'title' },
       { title: 'Описание', dataIndex: 'description', key: 'description' },
       { title: 'Адрес', dataIndex: 'location', key: 'location' },
       { title: 'Дата начала', dataIndex: 'start', key: 'start' },
       { title: 'Дата кончала', dataIndex: 'end', key: 'end' },
-    ]" :dataSource="events" />
+      { title: 'Действия', key: 'actions' }
+    ]" :dataSource="events" >
+    <template #bodyCell="{ column, value }" >
+      <a-button type="primary" danger @click="remove(value.id)" v-if="column.key == 'actions'">Удалить</a-button>
+      <p v-else>{{ value }}</p>
+    </template>  
+  </a-table>
   </div>
   </a-flex>
 </template>
