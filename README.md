@@ -2,6 +2,10 @@
 
 Look at the [Nuxt documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
 
+## Figma
+
+https://www.figma.com/design/zAV1P8R1ro5pdvI3j8ZAi0/Untitled?node-id=0-1&p=f&t=uCkypGOeFQeM3FBw-0
+
 ## Setup
 
 Make sure to install dependencies:
